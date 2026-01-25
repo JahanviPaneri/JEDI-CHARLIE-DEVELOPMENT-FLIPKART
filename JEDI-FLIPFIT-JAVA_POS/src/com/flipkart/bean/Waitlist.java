@@ -1,22 +1,15 @@
 package flipkart.bean;
 
 public class Waitlist {
-    private String waitlistId;        // Unique identifier for the waitlist entry
 
-    public int getPriority() {
-        return priority;
-    }
+    private String waitlistId;
+    private String waitlistDetailId;
+    private int priority;
 
-    public void setPriority(int priority) {
+    public Waitlist(String waitlistId, String waitlistDetailId, int priority) {
+        this.waitlistId = waitlistId;
+        this.waitlistDetailId = waitlistDetailId;
         this.priority = priority;
-    }
-
-    public String getWaitListDetailId() {
-        return waitlistDetailId;
-    }
-
-    public void setWaitListDetailId(String waitListDetailId) {
-        this.waitlistDetailId = waitListDetailId;
     }
 
     public String getWaitlistId() {
@@ -27,6 +20,19 @@ public class Waitlist {
         this.waitlistId = waitlistId;
     }
 
-    private String waitlistDetailId;  // Reference to the immutable snapshot of the waitlist info
-    private int priority;
+    public String getWaitListDetailId() {
+        return waitlistDetailId;
+    }
+
+    public void setWaitListDetailId(String waitlistDetailId) {
+        this.waitlistDetailId = waitlistDetailId;
+    }
+
+    public int getPriority() {
+        return priority;
+    }
+
+    public void setPriority(int priority) {
+        this.priority = priority;
+    }
 }

@@ -2,12 +2,10 @@ package flipkart.bean;
 
 public class Booking {
     private String bookingId;
+    private String bookingDetailId;
 
-    public String getBookingDetailId() {
-        return bookingDetailId;
-    }
-
-    public void setBookingDetailId(String bookingDetailId) {
+    public Booking(String bookingId, String bookingDetailId) {
+        this.bookingId = bookingId;
         this.bookingDetailId = bookingDetailId;
     }
 
@@ -19,5 +17,13 @@ public class Booking {
         this.bookingId = bookingId;
     }
 
-    private String bookingDetailId;
+    public String getBookingDetailId() {
+        return bookingDetailId;
+    }
+
+    public void setBookingDetailId(String bookingDetailId) {
+        this.bookingDetailId = bookingDetailId;
+    }
+
+
 }

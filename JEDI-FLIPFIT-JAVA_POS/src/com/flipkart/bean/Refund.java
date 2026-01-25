@@ -3,7 +3,26 @@ package flipkart.bean;
 import flipkart.constants.RefundStatus;
 
 public class Refund {
+
     private String refundId;
+    private String originalPaymentId;
+    private String reason;
+    private RefundStatus status;
+
+    public Refund(String refundId, String originalPaymentId, String reason, RefundStatus status) {
+        this.refundId = refundId;
+        this.originalPaymentId = originalPaymentId;
+        this.reason = reason;
+        this.status = status;
+    }
+
+    public String getRefundId() {
+        return refundId;
+    }
+
+    public void setRefundId(String refundId) {
+        this.refundId = refundId;
+    }
 
     public String getOriginalPaymentId() {
         return originalPaymentId;
@@ -21,14 +40,6 @@ public class Refund {
         this.reason = reason;
     }
 
-    public String getRefundId() {
-        return refundId;
-    }
-
-    public void setRefundId(String refundId) {
-        this.refundId = refundId;
-    }
-
     public RefundStatus getStatus() {
         return status;
     }
@@ -36,8 +47,4 @@ public class Refund {
     public void setStatus(RefundStatus status) {
         this.status = status;
     }
-
-    private String originalPaymentId;
-    private String reason;
-    private RefundStatus status;
 }

@@ -3,15 +3,19 @@ package flipkart.bean;
 import java.sql.Time;
 
 public class Notification {
+
     private String notificationId;
     private String userId;
+    private String message;
+    private Time time;
+    private String status;
 
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
+    public Notification(String notificationId, String userId, String message, Time time, String status) {
+        this.notificationId = notificationId;
+        this.userId = userId;
         this.message = message;
+        this.time = time;
+        this.status = status;
     }
 
     public String getNotificationId() {
@@ -22,12 +26,20 @@ public class Notification {
         this.notificationId = notificationId;
     }
 
-    public String getStatus() {
-        return status;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public Time getTime() {
@@ -38,15 +50,11 @@ public class Notification {
         this.time = time;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getStatus() {
+        return status;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setStatus(String status) {
+        this.status = status;
     }
-
-    private String message;
-    private Time time;
-    private String status;
 }

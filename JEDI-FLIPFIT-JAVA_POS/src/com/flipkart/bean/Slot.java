@@ -10,36 +10,14 @@ public class Slot {
     private int totalCapacity;
     private int availableCapacity;
 
-    public int getAvailableCapacity() {
-        return availableCapacity;
-    }
-
-    public void setAvailableCapacity(int availableCapacity) {
-        this.availableCapacity = availableCapacity;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public String getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(String endTime) {
+    public Slot(String slotId, String startTime, String endTime, String gymId, String date, int totalCapacity, int availableCapacity) {
+        this.slotId = slotId;
+        this.startTime = startTime;
         this.endTime = endTime;
-    }
-
-    public String getGymId() {
-        return gymId;
-    }
-
-    public void setGymId(String gymId) {
         this.gymId = gymId;
+        this.date = date;
+        this.totalCapacity = totalCapacity;
+        this.availableCapacity = availableCapacity;
     }
 
     public String getSlotId() {
@@ -58,6 +36,30 @@ public class Slot {
         this.startTime = startTime;
     }
 
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+
+    public String getGymId() {
+        return gymId;
+    }
+
+    public void setGymId(String gymId) {
+        this.gymId = gymId;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
     public int getTotalCapacity() {
         return totalCapacity;
     }
@@ -66,5 +68,11 @@ public class Slot {
         this.totalCapacity = totalCapacity;
     }
 
+    public int getAvailableCapacity() {
+        return availableCapacity;
+    }
 
+    public void setAvailableCapacity(int availableCapacity) {
+        this.availableCapacity = availableCapacity;
+    }
 }

@@ -1,14 +1,14 @@
 package flipkart.bean;
 
 public class Role {
+
     private String roleId;
     private String roleName;
+    private String roleDesc;
 
-    public String getRoleDesc() {
-        return roleDesc;
-    }
-
-    public void setRoleDesc(String roleDesc) {
+    public Role(String roleId, String roleName, String roleDesc) {
+        this.roleId = roleId;
+        this.roleName = roleName;
         this.roleDesc = roleDesc;
     }
 
@@ -28,5 +28,11 @@ public class Role {
         this.roleName = roleName;
     }
 
-    private String roleDesc;
+    public String getRoleDesc() {
+        return roleDesc;
+    }
+
+    public void setRoleDesc(String roleDesc) {
+        this.roleDesc = roleDesc;
+    }
 }

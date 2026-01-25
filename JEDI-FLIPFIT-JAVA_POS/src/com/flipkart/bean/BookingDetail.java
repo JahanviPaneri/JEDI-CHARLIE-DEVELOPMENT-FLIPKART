@@ -1,13 +1,27 @@
 package flipkart.bean;
 
 import flipkart.constants.BookingStatus;
-
 import java.util.Date;
 
 public class BookingDetail {
 
     private String bookingDetailId;
     private String userId;
+    private String gymId;
+    private String slotId;
+    private BookingStatus status;
+    private Date date;
+    private Payment paymentDetails;
+
+    public BookingDetail(String bookingDetailId, String userId, String gymId, String slotId, BookingStatus status, Date date, Payment paymentDetails) {
+        this.bookingDetailId = bookingDetailId;
+        this.userId = userId;
+        this.gymId = gymId;
+        this.slotId = slotId;
+        this.status = status;
+        this.date = date;
+        this.paymentDetails = paymentDetails;
+    }
 
     public String getBookingDetailId() {
         return bookingDetailId;
@@ -17,12 +31,12 @@ public class BookingDetail {
         this.bookingDetailId = bookingDetailId;
     }
 
-    public Date getDate() {
-        return date;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getGymId() {
@@ -31,14 +45,6 @@ public class BookingDetail {
 
     public void setGymId(String gymId) {
         this.gymId = gymId;
-    }
-
-    public Payment getPaymentDetails() {
-        return paymentDetails;
-    }
-
-    public void setPaymentDetails(Payment paymentDetails) {
-        this.paymentDetails = paymentDetails;
     }
 
     public String getSlotId() {
@@ -57,18 +63,19 @@ public class BookingDetail {
         this.status = status;
     }
 
-    public String getUserId() {
-        return userId;
+    public Date getDate() {
+        return date;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
-    private String gymId;
-    private String slotId;
-    private BookingStatus status;
-    private Date date;
-    private Payment paymentDetails;
+    public Payment getPaymentDetails() {
+        return paymentDetails;
+    }
 
+    public void setPaymentDetails(Payment paymentDetails) {
+        this.paymentDetails = paymentDetails;
+    }
 }
