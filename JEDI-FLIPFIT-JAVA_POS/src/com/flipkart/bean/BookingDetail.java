@@ -1,6 +1,6 @@
-package flipkart.bean;
+package com.flipkart.bean;
 
-import flipkart.constants.BookingStatus;
+import com.flipkart.constants.BookingStatus;
 import java.util.Date;
 
 public class BookingDetail {

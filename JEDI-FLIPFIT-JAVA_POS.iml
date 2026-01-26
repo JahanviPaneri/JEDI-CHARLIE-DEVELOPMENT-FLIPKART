@@ -2,7 +2,7 @@
 <module version="4">
   <component name="AdditionalModuleElements">
     <content url="file://$MODULE_DIR$/JEDI-FLIPFIT-JAVA_POS" dumb="true">
-      <sourceFolder url="file://$MODULE_DIR$/JEDI-FLIPFIT-JAVA_POS/src/com" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/JEDI-FLIPFIT-JAVA_POS/src" isTestSource="false" />
     </content>
   </component>
 </module>

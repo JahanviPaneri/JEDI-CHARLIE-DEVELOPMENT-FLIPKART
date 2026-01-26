@@ -1,6 +1,6 @@
-package flipkart.bean;
+package com.flipkart.bean;
 
-import flipkart.constants.PaymentStatus;
+import com.flipkart.constants.PaymentStatus;
 import java.sql.Time;
 
 public class Payment {

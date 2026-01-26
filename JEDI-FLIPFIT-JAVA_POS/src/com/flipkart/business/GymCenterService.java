@@ -2,51 +2,51 @@ package com.flipkart.business;
 
 import com.flipkart.bean.GymCenter;
 import com.flipkart.bean.Slot;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class GymCenterServiceInterfaceImpl implements GymCenterServiceInterface {
+public class GymCenterService implements GymCenterInterface {
+
     @Override
     public void addSlot(String gymId, Slot slot) {
-        // 1. Logic: Verify if the gym exists
-        // 2. Logic: Ensure the slot timing is valid (e.g., startTime < endTime)
-        // 3. DAO: gymDao.addSlot(gymId, slot);
-        System.out.println("Slot added successfully to Gym: " + gymId);
+        // Logic: Validate slot timing overlap
+        System.out.println("Adding slot to gym ID: " + gymId);
     }
 
     @Override
     public void removeSlot(String slotId) {
-        // 1. Logic: Check if there are any active bookings for this slot
-        // 2. If yes, throw an exception or handle cancellation
-        // 3. DAO: gymDao.deleteSlot(slotId);
-        System.out.println("Slot " + slotId + " has been removed.");
+        // Logic: Check if bookings exist before removing
+        System.out.println("Removing slot ID: " + slotId);
     }
 
     @Override
-    public List<GymCenter> getAllGymCenters() {
-        // Logic: Return only those gyms where status is 'APPROVED'
-        System.out.println("Fetching all approved gym centers...");
-        return new ArrayList<>();
+    public List<GymCenter> viewAllCenters() {
+        // Logic: Fetch from DAO where status is APPROVED
+        GymCenter tempGym=new GymCenter();
+        tempGym.setGymId("123");
+        tempGym.setGymLocation("Bangalore");
+        tempGym.setGymName("Demo Gym");
+        List<GymCenter> tempList=new ArrayList<>();
+        tempList.add(tempGym);
+        return tempList;
     }
 
     @Override
-    public List<GymCenter> getGymCentersByCity(String city) {
-        // DAO: gymDao.getGymsByCity(city);
-        return new ArrayList<>();
+    public List<Slot> getAvailableSlots(String gymId) {
+        // Logic: Fetch slots for gymId where capacity > 0
+        Slot slot=new Slot();
+        slot.setSlotId("321");
+        slot.setAvailableCapacity(120);
+        slot.setTotalCapacity(200);
+        slot.setStartTime("8 AM");
+        slot.setDate("30-1-2026");
+        List<Slot> slotList=new ArrayList<>();
+        slotList.add(slot);
+        return slotList;
     }
 
     @Override
-    public List<Slot> getAvailableSlotsByGym(String gymId) {
-        // Logic: Return slots where availableCapacity > 0
-        return new ArrayList<>();
+    public void updateGymDetails(GymCenter gym) {
+        System.out.println("Updating details for: " + gym.getGymName());
     }
-
-    @Override
-    public void updateGymStatus(String gymId, String status) {
-        // Logic: Used by Admin to change status to APPROVED or REJECTED
-        // DAO: gymDao.updateStatus(gymId, status);
-        System.out.println("Gym " + gymId + " status updated to: " + status);
-    }
-
 }

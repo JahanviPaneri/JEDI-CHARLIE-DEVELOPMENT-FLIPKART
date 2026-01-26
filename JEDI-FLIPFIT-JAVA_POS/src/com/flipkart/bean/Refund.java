@@ -1,6 +1,6 @@
-package flipkart.bean;
+package com.flipkart.bean;
 
-import flipkart.constants.RefundStatus;
+import com.flipkart.constants.RefundStatus;
 
 public class Refund {
 

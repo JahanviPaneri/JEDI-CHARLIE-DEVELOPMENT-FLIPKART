@@ -1,4 +1,4 @@
-package flipkart.bean;
+package com.flipkart.bean;
 
 public class Booking {
     private String bookingId;
@@ -26,4 +26,7 @@ public class Booking {
     }
 
 
+    public String getUserId() {
+        return this.getUserId();
+    }
 }

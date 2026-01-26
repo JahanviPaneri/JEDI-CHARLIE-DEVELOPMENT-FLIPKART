@@ -1,13 +1,9 @@
-package flipkart.bean;
+package com.flipkart.bean;
 
 public class Customer extends User {
     private String customerId;
     private String cardNumber;
 
-    public Customer(String customerId, String cardNumber) {
-        this.customerId = customerId;
-        this.cardNumber = cardNumber;
-    }
 
     public String getCustomerId() {
         return customerId;

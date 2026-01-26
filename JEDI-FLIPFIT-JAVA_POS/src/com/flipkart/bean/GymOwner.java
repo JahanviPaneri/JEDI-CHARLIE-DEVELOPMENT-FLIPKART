@@ -1,16 +1,11 @@
-package flipkart.bean;
+package com.flipkart.bean;
 
-public class GymOwner {
+public class GymOwner extends User {
 
     private String ownerId;
     private String accountNumber;
     private String panNumber;
 
-    public GymOwner(String ownerId, String accountNumber, String panNumber) {
-        this.ownerId = ownerId;
-        this.accountNumber = accountNumber;
-        this.panNumber = panNumber;
-    }
 
     public String getOwnerId() {
         return ownerId;

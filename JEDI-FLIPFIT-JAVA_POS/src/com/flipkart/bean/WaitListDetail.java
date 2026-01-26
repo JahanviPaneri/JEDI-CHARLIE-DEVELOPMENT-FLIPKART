@@ -1,6 +1,6 @@
-package flipkart.bean;
+package com.flipkart.bean;
 
-import flipkart.constants.WaitlistStatus;
+import com.flipkart.constants.WaitlistStatus;
 import java.util.Date;
 
 public class WaitListDetail {

@@ -1,4 +1,4 @@
-package flipkart.bean;
+package com.flipkart.bean;
 
 import java.sql.Time;
 

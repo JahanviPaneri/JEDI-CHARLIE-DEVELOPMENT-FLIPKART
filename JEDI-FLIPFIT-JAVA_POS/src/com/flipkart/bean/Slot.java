@@ -1,4 +1,4 @@
-package flipkart.bean;
+package com.flipkart.bean;
 
 public class Slot {
 
@@ -9,6 +9,8 @@ public class Slot {
     private String date;
     private int totalCapacity;
     private int availableCapacity;
+
+    public Slot(){}
 
     public Slot(String slotId, String startTime, String endTime, String gymId, String date, int totalCapacity, int availableCapacity) {
         this.slotId = slotId;

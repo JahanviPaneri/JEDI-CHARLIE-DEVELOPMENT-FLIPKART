@@ -1,4 +1,7 @@
 package com.flipkart.business;
 
-public class NotificationInterface {
+
+public interface NotificationInterface {
+    void sendNotification(String userId, String message);
+    void markAsRead(String notificationId);
 }

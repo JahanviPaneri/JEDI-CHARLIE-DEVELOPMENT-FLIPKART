@@ -1,4 +1,4 @@
-package flipkart.constants;
+package com.flipkart.constants;
 
 public enum WaitlistStatus {
     ACTIVE,

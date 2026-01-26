@@ -1,4 +1,7 @@
 package com.flipkart.business;
 
-public class PaymentInterface {
+public interface PaymentInterface {
+    boolean processPayment(String userId, double amount);
+    void requestRefund(String paymentId);
 }
+

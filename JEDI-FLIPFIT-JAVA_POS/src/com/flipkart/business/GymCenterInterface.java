@@ -2,15 +2,15 @@ package com.flipkart.business;
 
 import com.flipkart.bean.GymCenter;
 import com.flipkart.bean.Slot;
-
 import java.util.List;
 
-public interface GymCenterServiceInterface {
+public interface GymCenterInterface {
+    // Slot Logic
     void addSlot(String gymId, Slot slot);
     void removeSlot(String slotId);
-    List<GymCenter> getAllGymCenters();
-    List<GymCenter> getGymCentersByCity(String city);
-    List<Slot> getAvailableSlotsByGym(String gymId);
 
-    void updateGymStatus(String gymId, String status);
+    // Retrieval Logic
+    List<GymCenter> viewAllCenters();
+    List<Slot> getAvailableSlots(String gymId);
+    void updateGymDetails(GymCenter gym);
 }

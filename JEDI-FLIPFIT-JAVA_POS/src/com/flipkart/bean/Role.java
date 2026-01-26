@@ -1,16 +1,10 @@
-package flipkart.bean;
+package com.flipkart.bean;
 
 public class Role {
 
     private String roleId;
     private String roleName;
     private String roleDesc;
-
-    public Role(String roleId, String roleName, String roleDesc) {
-        this.roleId = roleId;
-        this.roleName = roleName;
-        this.roleDesc = roleDesc;
-    }
 
     public String getRoleId() {
         return roleId;

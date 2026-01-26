@@ -1,4 +1,4 @@
-package flipkart.bean;
+package com.flipkart.bean;
 
 public class User {
 
@@ -7,18 +7,7 @@ public class User {
     private String email;
     private String passwordHash;
     private String phoneNumber;
-    private String status;
     private Role role;
-
-    public User(String userId, String name, String email, String passwordHash, String phoneNumber, String status, Role role) {
-        this.userId = userId;
-        this.name = name;
-        this.email = email;
-        this.passwordHash = passwordHash;
-        this.phoneNumber = phoneNumber;
-        this.status = status;
-        this.role = role;
-    }
 
     public String getUserId() {
         return userId;
@@ -58,14 +47,6 @@ public class User {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public Role getRole() {

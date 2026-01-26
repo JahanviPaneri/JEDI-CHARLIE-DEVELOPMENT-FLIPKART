@@ -1,6 +1,6 @@
-package flipkart.bean;
+package com.flipkart.bean;
 
-import flipkart.constants.GymStatus;
+import com.flipkart.constants.GymStatus;
 
 public class GymCenter {
 
@@ -9,6 +9,10 @@ public class GymCenter {
     private String gymLocation;
     private GymStatus gymStatus;
     private String gymOwnerId;
+
+
+    public GymCenter(){}
+
 
     public GymCenter(String gymId, String gymName, String gymLocation, GymStatus gymStatus, String gymOwnerId) {
         this.gymId = gymId;
