@@ -1,11 +1,11 @@
-package flipkart.business;
+package com.flipkart.business;
 
-import flipkart.bean.GymCenter;
-import flipkart.bean.Slot;
+import com.flipkart.bean.GymCenter;
+import com.flipkart.bean.Slot;
 
 import java.util.List;
 
-public interface GymCenterInterface {
+public interface GymCenterServiceInterface {
     void addSlot(String gymId, Slot slot);
     void removeSlot(String slotId);
     List<GymCenter> getAllGymCenters();
