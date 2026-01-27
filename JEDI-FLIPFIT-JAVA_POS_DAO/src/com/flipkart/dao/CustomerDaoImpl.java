@@ -41,31 +41,34 @@
 package com.flipkart.dao;
 
 import com.flipkart.bean.Customer;
+import com.flipfit.utils.DBConnection;
+import com.flipfit.constant.SQLConstants;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CustomerDaoImpl.
+ * Implementation of CustomerDaoInterface providing database operations for Customer entities.
+ *
+ * @author FlipFit Development Team
+ * @version 1.0
+ */
 public class CustomerDaoImpl implements CustomerDaoInterface {
 
-    // Database connection details
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/flipfit_schema";
-    private static final String USER = "root";
-    private static final String PASS = "admin123";
-
-    // Helper method to get a connection
-    private Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(DB_URL, USER, PASS);
-    }
-
+    /**
+     * Adds the customer to the database.
+     *
+     * @param customer the customer object to be added
+     */
     @Override
     public void addCustomer(Customer customer) {
-        String sql = "INSERT INTO Customer (customerId, name, email, phoneNumber,password) VALUES (?, ?, ?, ?,?)";
-        try (Connection conn = getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(SQLConstants.INSERT_CUSTOMER)) {
 
             pstmt.setString(1, customer.getCustomerId());
             pstmt.setString(2, customer.getName());
@@ -77,14 +80,20 @@ public class CustomerDaoImpl implements CustomerDaoInterface {
             System.out.println("DAO: Customer registered successfully in DB with ID: " + customer.getCustomerId());
         } catch (SQLException e) {
             System.err.println("Error adding customer: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
+    /**
+     * Gets the customer by id.
+     *
+     * @param customerId the customer id
+     * @return the customer object if found, null otherwise
+     */
     @Override
     public Customer getCustomerById(String customerId) {
-        String sql = "SELECT * FROM Customer WHERE customerId = ?";
-        try (Connection conn = getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(SQLConstants.SELECT_CUSTOMER_BY_ID)) {
 
             pstmt.setString(1, customerId);
             try (ResultSet rs = pstmt.executeQuery()) {
@@ -98,11 +107,16 @@ public class CustomerDaoImpl implements CustomerDaoInterface {
         return null;
     }
 
+    /**
+     * Gets the customer by email.
+     *
+     * @param email the email address
+     * @return the customer object if found, null otherwise
+     */
     @Override
     public Customer getCustomerByEmail(String email) {
-        String sql = "SELECT * FROM Customer WHERE email = ?";
-        try (Connection conn = getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(SQLConstants.SELECT_CUSTOMER_BY_EMAIL)) {
 
             pstmt.setString(1, email);
             try (ResultSet rs = pstmt.executeQuery()) {
@@ -116,12 +130,16 @@ public class CustomerDaoImpl implements CustomerDaoInterface {
         return null;
     }
 
+    /**
+     * Gets all customers from the database.
+     *
+     * @return the list of all customers
+     */
     @Override
     public List<Customer> getAllCustomers() {
         List<Customer> customers = new ArrayList<>();
-        String sql = "SELECT * FROM Customer";
-        try (Connection conn = getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql);
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(SQLConstants.SELECT_ALL_CUSTOMERS);
              ResultSet rs = pstmt.executeQuery()) {
 
             while (rs.next()) {
@@ -133,11 +151,24 @@ public class CustomerDaoImpl implements CustomerDaoInterface {
         return customers;
     }
 
-    // Helper method to reduce code duplication
+    /**
+     * Map result set to customer.
+     * Helper method to convert database result set to Customer bean.
+     *
+     * @param rs the result set from database query
+     * @return the customer object
+     * @throws SQLException the SQL exception
+     */
     private Customer mapResultSetToCustomer(ResultSet rs) throws SQLException {
         Customer customer = new Customer();
         customer.setCustomerId(rs.getString("customerId"));
         customer.setName(rs.getString("name"));
+        customer.setEmail(rs.getString("email"));
+        customer.setPhoneNumber(rs.getString("phoneNumber"));
+        customer.setPasswordHash(rs.getString("password"));
+        return customer;
+    }
+}
         customer.setEmail(rs.getString("email"));
         customer.setPhoneNumber(rs.getString("phoneNumber"));
         customer.setPasswordHash(rs.getString("password"));
