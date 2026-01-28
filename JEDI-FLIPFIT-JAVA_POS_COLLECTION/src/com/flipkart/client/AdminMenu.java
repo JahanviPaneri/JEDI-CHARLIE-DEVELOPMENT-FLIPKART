@@ -3,6 +3,7 @@ package com.flipfit.client;
 import com.flipfit.business.AdminService;
 import com.flipfit.bean.GymCenter;
 import com.flipfit.bean.GymOwner;
+import com.flipfit.bean.GymOwnerWaitlist;
 import java.util.List;
 import java.util.Scanner;
 
@@ -23,17 +24,10 @@ public class AdminMenu {
 
             switch (choice) {
                 case 1:
-                    List<GymOwner> owners = adminService.viewPendingOwners();
-                    // Display logic for list
-                    for(GymOwner owner:owners){
-                        System.out.println("OwnerId -> "+owner.getOwnerId() + " OwnerName -> "+ owner.getName());
-                    }
-
+                    viewPendingOwnerRequests();
                     break;
                 case 2:
-                    System.out.println("Enter Owner ID to approve:");
-                    String ownerId = scanner.next();
-                    adminService.approveGymOwner(ownerId);
+                    approveOwnerRequest();
                     break;
                 case 3:
                     List<GymCenter> gyms = adminService.viewPendingGyms();
@@ -52,5 +46,28 @@ public class AdminMenu {
                     System.out.println("Invalid choice!");
             }
         }
+    }
+
+    private void viewPendingOwnerRequests() {
+        List<GymOwnerWaitlist> pendingRequests = adminService.viewPendingWaitlistEntries();
+        
+        if (pendingRequests.isEmpty()) {
+            System.out.println("No pending gym owner requests.");
+        } else {
+            System.out.println("\n--- Pending Gym Owner Requests ---");
+            for (GymOwnerWaitlist request : pendingRequests) {
+                System.out.println("Owner ID: " + request.getOwnerId());
+                System.out.println("  Email: " + request.getEmail());
+                System.out.println("  Account Number: " + request.getAccountNumber());
+                System.out.println("  PAN Number: " + request.getPanNumber());
+                System.out.println("---");
+            }
+        }
+    }
+
+    private void approveOwnerRequest() {
+        System.out.println("Enter Owner ID to approve:");
+        String ownerId = scanner.next();
+        adminService.approveGymOwner(ownerId);
     }
 }

@@ -68,16 +68,16 @@ public class ApplicationMenu {
     }
 
     private static void registerGymOwner(Scanner scanner) {
-        System.out.println("Enter Username:");
-        String name = scanner.next();
         System.out.println("Enter email:");
         String email = scanner.next();
-        System.out.println("Enter phoneNumber:");
-        String phoneNumber = scanner.next();
         System.out.println("Enter Password:");
         String password = scanner.next();
+        System.out.println("Enter Account Number:");
+        String accountNumber = scanner.next();
+        System.out.println("Enter PAN Number:");
+        String panNumber = scanner.next();
 
         GymOwnerService gymOwnerService=new GymOwnerService();
-        gymOwnerService.registerOwner(name,email,phoneNumber,password);
+        gymOwnerService.registerOwner(email, password, accountNumber, panNumber);
     }
 }

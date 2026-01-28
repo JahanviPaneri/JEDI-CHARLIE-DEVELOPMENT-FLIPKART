@@ -2,9 +2,11 @@ package com.flipfit.business;
 
 import com.flipfit.bean.Customer;
 import com.flipfit.bean.GymOwner;
+import com.flipfit.bean.GymOwnerWaitlist;
 import com.flipfit.bean.GymCenter;
 import com.flipfit.bean.Role;
 import com.flipfit.constants.GymStatus;
+import com.flipfit.dao.GymOwnerWaitlistDaoImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,30 +14,26 @@ import java.util.UUID;
 
 public class GymOwnerService implements GymOwnerInterface {
 
+    private GymOwnerWaitlistDaoImpl waitlistDao = new GymOwnerWaitlistDaoImpl();
+
     @Override
-    public void registerOwner(String name, String email , String phoneNumber, String password) {
-        // Logic: Save owner details via DAO
+    public void registerOwner(String email, String password, String accountNumber, String panNumber) {
+        // Create a new waitlist entry with ownerId
+        String ownerId = UUID.randomUUID().toString();
+        
+        GymOwnerWaitlist waitlistEntry = new GymOwnerWaitlist();
+        waitlistEntry.setOwnerId(ownerId);
+        waitlistEntry.setEmail(email);
+        waitlistEntry.setPassword(password);  // In production, hash this password
+        waitlistEntry.setAccountNumber(accountNumber);
+        waitlistEntry.setPanNumber(panNumber);
 
-        GymOwner owner=new GymOwner();
-        owner.setUserId(UUID.randomUUID().toString());
-        owner.setOwnerId(UUID.randomUUID().toString());
-        owner.setName(name);
-        owner.setEmail(email);
-        owner.setPhoneNumber(phoneNumber);
-        //create hash of password and save hash
-        owner.setPasswordHash(password);
+        // Save to gym_owner_waitlist table
+        waitlistDao.addToWaitlist(waitlistEntry);
 
-
-        Role role =new Role();
-        //set role id and role des and role name
-        role.setRoleName("GymOwner");
-        owner.setRole(role);
-
-
-
-        // send the request to admin => pending
-
-        System.out.println("Request for registration sent successfully with ownerId---> " + owner.getOwnerId());
+        System.out.println("Gym Owner registration request submitted successfully!");
+        System.out.println("Your request ID is: " + ownerId);
+        System.out.println("Your request is pending admin approval.");
     }
 
     @Override
