@@ -1,10 +1,13 @@
 package com.flipfit.bean;
 
+import com.flipfit.constants.GymStatus;
+
 public class GymOwner extends User {
 
     private String ownerId;
     private String accountNumber;
     private String panNumber;
+    private GymStatus gymStatus;
 
 
     public String getOwnerId() {
@@ -29,5 +32,13 @@ public class GymOwner extends User {
 
     public void setPanNumber(String panNumber) {
         this.panNumber = panNumber;
+    }
+
+    public GymStatus getOwnerStatus() {
+        return gymStatus;
+    }
+
+    public void setOwnerStatus(GymStatus gymStatus) {
+        this.gymStatus = gymStatus;
     }
 }

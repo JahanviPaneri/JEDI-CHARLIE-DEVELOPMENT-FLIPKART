@@ -2,6 +2,7 @@ package com.flipfit.business;
 
 import com.flipfit.bean.GymCenter;
 import com.flipfit.bean.GymOwner;
+import com.flipfit.constants.*;
 import java.util.List;
 
 /**
@@ -23,4 +24,18 @@ public interface AdminInterface {
 
     // Get a list of all owners waiting for admin permission
     List<GymOwner> viewPendingOwners();
+
+    /**
+     * Filters gym centers based on their approval status (APPROVED, PENDING, REJECTED).
+     * @param status The status to filter by.
+     * @return List of GymCenters matching the status.
+     */
+    List<GymCenter> filterGymCentersByStatus(GymStatus status);
+
+    /**
+     * Filters gym owners based on their approval status (APPROVED, PENDING, REJECTED).
+     * @param status The status to filter by.
+     * @return List of GymOwners matching the status.
+     */
+    List<GymOwner> filterGymOwnersByStatus(GymStatus status);
 }

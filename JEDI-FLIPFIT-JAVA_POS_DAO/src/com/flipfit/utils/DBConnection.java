@@ -22,7 +22,7 @@ public class DBConnection {
     private static final String USER = "root";
     
     /** The database password. */
-    private static final String PASS = "admin123";
+    private static final String PASS = "nitya@2004";
 
     /**
      * Gets the database connection.
