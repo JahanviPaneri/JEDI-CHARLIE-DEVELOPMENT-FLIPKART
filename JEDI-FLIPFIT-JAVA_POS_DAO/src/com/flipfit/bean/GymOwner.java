@@ -5,7 +5,7 @@ public class GymOwner extends User {
     private String ownerId;
     private String accountNumber;
     private String panNumber;
-
+    private String aadharNumber;
 
     public String getOwnerId() {
         return ownerId;
@@ -29,5 +29,13 @@ public class GymOwner extends User {
 
     public void setPanNumber(String panNumber) {
         this.panNumber = panNumber;
+    }
+
+    public String getAadharNumber() {
+        return aadharNumber;
+    }
+
+    public void setAadharNumber(String aadharNumber) {
+        this.aadharNumber = aadharNumber;
     }
 }

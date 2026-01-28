@@ -3,7 +3,12 @@ package com.flipfit.business;
 import com.flipfit.bean.GymOwner;
 import com.flipfit.bean.GymCenter;
 import com.flipfit.bean.Role;
+import com.flipfit.bean.User;
 import com.flipfit.constants.GymStatus;
+import com.flipfit.dao.GymOwnerDaoImpl;
+import com.flipfit.dao.GymOwnerDaoInterface;
+import com.flipfit.dao.UserDaoImpl;
+import com.flipfit.dao.UserDaoInterface;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,34 +19,50 @@ import java.util.UUID;
  */
 public class GymOwnerService implements GymOwnerInterface {
 
+    GymOwnerDaoInterface gymOwnerDao = new GymOwnerDaoImpl();
+    UserDaoInterface userDao = new UserDaoImpl();
+
     @Override
-    public void registerOwner(String name, String email, String phoneNumber, String password) {
-        // Prepare a new owner profile with unique IDs
-        GymOwner owner = new GymOwner();
-        String uniqueId = UUID.randomUUID().toString();
+    public void registerOwner(String name, String email , String phoneNumber, String password, String panNumber, String aadharNumber) {
+        try {
+            String userId = UUID.randomUUID().toString();
+            String ownerId = UUID.randomUUID().toString();
 
-        owner.setUserId(uniqueId);
-        owner.setOwnerId(UUID.randomUUID().toString());
-        owner.setName(name);
-        owner.setEmail(email);
-        owner.setPhoneNumber(phoneNumber);
-        owner.setPasswordHash(password);
+            Role role = new Role();
+            role.setRoleName("GymOwner");
 
-        // Assign the 'GymOwner' role to the profile
-        Role role = new Role();
-        role.setRoleName("GymOwner");
-        owner.setRole(role);
+            GymOwner owner = new GymOwner();
+            owner.setUserId(userId);
+            owner.setOwnerId(ownerId);
+            owner.setName(name);
+            owner.setEmail(email);
+            owner.setPhoneNumber(phoneNumber);
+            owner.setPasswordHash(password);
+            owner.setRole(role);
+            // Setting new details
+            owner.setPanNumber(panNumber);
+            owner.setAadharNumber(aadharNumber);
 
-        // Note: New owners are usually 'Pending' until Admin approves them
-        System.out.println("Registration request sent for owner: " + owner.getName());
+            User user = new User();
+            user.setUserId(userId);
+            user.setName(name);
+            user.setEmail(email);
+            user.setPhoneNumber(phoneNumber);
+            user.setPasswordHash(password);
+            user.setRole(role);
+
+            userDao.addUser(user);
+            gymOwnerDao.addGymOwner(owner);
+
+            System.out.println("Request for registration sent successfully with ownerId---> " + owner.getOwnerId());
+        } catch (Exception e) {
+            System.out.println("Registration failed: " + e.getMessage());
+        }
     }
 
     @Override
     public void requestGymAddition(GymCenter gym) {
-        // Set the gym status to pending so it waits for admin approval
         gym.setGymStatus(GymStatus.PENDING);
-
-        // Save the new gym details to the database via DAO
         System.out.println("Gym addition request raised for: " + gym.getGymName());
     }
 
@@ -53,8 +74,7 @@ public class GymOwnerService implements GymOwnerInterface {
 
     @Override
     public List<GymCenter> viewMyGyms(String ownerId) {
-        // Fetch and return all gyms belonging to this specific owner
-        GymCenter tempGym = new GymCenter();
+        GymCenter tempGym=new GymCenter();
         tempGym.setGymId("123");
         tempGym.setGymLocation("Bangalore");
         tempGym.setGymName("Demo Gym");

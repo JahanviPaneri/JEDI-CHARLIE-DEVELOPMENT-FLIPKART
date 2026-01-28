@@ -24,11 +24,10 @@ public class AdminMenu {
             switch (choice) {
                 case 1:
                     List<GymOwner> owners = adminService.viewPendingOwners();
-                    // Display logic for list
-                    for(GymOwner owner:owners){
-                        System.out.println("OwnerId -> "+owner.getOwnerId() + " OwnerName -> "+ owner.getName());
+                    System.out.println("\n--- Pending Gym Owners ---");
+                    for(GymOwner owner : owners){
+                        System.out.println("ID: " + owner.getOwnerId() + " | Name: " + owner.getName() + " | Email: " + owner.getEmail());
                     }
-
                     break;
                 case 2:
                     System.out.println("Enter Owner ID to approve:");
@@ -37,8 +36,9 @@ public class AdminMenu {
                     break;
                 case 3:
                     List<GymCenter> gyms = adminService.viewPendingGyms();
-                    for(GymCenter g:gyms){
-                        System.out.println("GymId ->" + g.getGymId() + " GymLocation ->" +g.getGymName() + " GymName -->" + g.getGymName());
+                    System.out.println("\n--- Pending Gym Centers ---");
+                    for(GymCenter g : gyms){
+                        System.out.println("ID: " + g.getGymId() + " | Name: " + g.getGymName() + " | Location: " + g.getGymLocation());
                     }
                     break;
                 case 4:
@@ -47,7 +47,7 @@ public class AdminMenu {
                     adminService.approveGymCenter(gymId);
                     break;
                 case 5:
-                    return;
+                    return; // Go back to main menu
                 default:
                     System.out.println("Invalid choice!");
             }

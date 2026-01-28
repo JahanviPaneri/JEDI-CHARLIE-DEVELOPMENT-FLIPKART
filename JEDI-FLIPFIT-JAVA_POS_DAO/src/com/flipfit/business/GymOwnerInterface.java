@@ -7,11 +7,7 @@ import java.util.List;
  * Interface for gym owners to manage their profile and gym centers.
  */
 public interface GymOwnerInterface {
-
-    // Register a new gym owner account in the system
-    void registerOwner(String name, String email, String phoneNumber, String password);
-
-    // Submit a request to add a new gym center for admin approval
+    void registerOwner(String name, String email , String phoneNumber, String password, String panNumber, String aadharNumber);
     void requestGymAddition(GymCenter gym);
 
     // Submit a request to delete a gym center from the platform

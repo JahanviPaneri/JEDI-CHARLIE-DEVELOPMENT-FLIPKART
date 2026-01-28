@@ -16,16 +16,13 @@ import java.util.UUID;
 public class AdminService implements AdminInterface {
 
     @Override
-    public void registerAdmin(String name, String email, String phoneNumber, String password) {
-        // Create unique identifiers for the user and admin records
+    public void registerAdmin(String name, String email, String phoneNumber, String password, String aadharNumber, String panNumber) {
         String userId = UUID.randomUUID().toString();
         String adminId = UUID.randomUUID().toString();
 
-        // Assign the 'Admin' role to the new user
         Role adminRole = new Role();
         adminRole.setRoleName("Admin");
 
-        // Populate the general User profile
         User user = new User();
         user.setUserId(userId);
         user.setName(name);
@@ -34,7 +31,6 @@ public class AdminService implements AdminInterface {
         user.setPasswordHash(password);
         user.setRole(adminRole);
 
-        // Populate the Admin-specific details
         Admin admin = new Admin();
         admin.setUserId(userId);
         admin.setAdminId(adminId);
@@ -43,12 +39,13 @@ public class AdminService implements AdminInterface {
         admin.setPhoneNumber(phoneNumber);
         admin.setPasswordHash(password);
         admin.setRole(adminRole);
+        // Setting new details
+        admin.setAadharNumber(aadharNumber);
+        admin.setPanNumber(panNumber);
 
-        // Save the profile to the central User database
         UserDaoInterface userDao = new UserDaoImpl();
         userDao.addUser(user);
 
-        // Save the profile to the specific Admin database
         AdminDaoInterface adminDao = new AdminDaoImpl();
         adminDao.addAdmin(admin);
 
@@ -57,20 +54,17 @@ public class AdminService implements AdminInterface {
 
     @Override
     public void approveGymCenter(String gymId) {
-        // Change the status of a gym to 'Approved' in the database
         System.out.println("Admin approved Gym ID: " + gymId);
     }
 
     @Override
     public void approveGymOwner(String ownerId) {
-        // Verify the gym owner to allow them full access to the platform
         System.out.println("Admin approved Owner ID: " + ownerId);
     }
 
     @Override
     public List<GymCenter> viewPendingGyms() {
-        // Retrieve all gym centers currently waiting for admin validation
-        GymCenter tempGym = new GymCenter();
+        GymCenter tempGym=new GymCenter();
         tempGym.setGymId("123");
         tempGym.setGymLocation("Bangalore");
         tempGym.setGymName("Demo Gym");
@@ -81,7 +75,6 @@ public class AdminService implements AdminInterface {
 
     @Override
     public List<GymOwner> viewPendingOwners() {
-        // Retrieve all gym owners currently waiting for admin validation
         GymOwner owner = new GymOwner();
         owner.setOwnerId("1234");
         owner.setName("Demo owner");

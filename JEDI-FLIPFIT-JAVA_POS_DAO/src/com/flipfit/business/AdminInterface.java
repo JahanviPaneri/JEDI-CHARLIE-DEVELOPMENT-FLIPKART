@@ -8,11 +8,7 @@ import java.util.List;
  * Interface for Admin operations like registration and approvals.
  */
 public interface AdminInterface {
-
-    // Register a new admin into the system
-    void registerAdmin(String name, String email, String phoneNumber, String password);
-
-    // Verify and allow a gym center to start its business
+    void registerAdmin(String name, String email, String phoneNumber, String password, String aadharNumber, String panNumber);
     void approveGymCenter(String gymId);
 
     // Verify and allow a gym owner to use the platform

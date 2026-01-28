@@ -10,9 +10,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Implementation of Admin database operations.
- */
 public class AdminDaoImpl implements AdminDaoInterface {
 
     @Override
@@ -25,6 +22,9 @@ public class AdminDaoImpl implements AdminDaoInterface {
             pstmt.setString(2, admin.getName());
             pstmt.setString(3, admin.getEmail());
             pstmt.setString(4, admin.getUserId());
+            // Setting new fields
+            pstmt.setString(5, admin.getAadharNumber());
+            pstmt.setString(6, admin.getPanNumber());
 
             // Execute the query to save admin details in MySQL
             pstmt.executeUpdate();
@@ -88,13 +88,15 @@ public class AdminDaoImpl implements AdminDaoInterface {
         return admins;
     }
 
-    // Helper method to convert a database row into an Admin Java object
     private Admin mapResultSetToAdmin(ResultSet rs) throws SQLException {
         Admin admin = new Admin();
         admin.setAdminId(rs.getString("adminId"));
         admin.setName(rs.getString("name"));
         admin.setEmail(rs.getString("email"));
         admin.setUserId(rs.getString("userId"));
+        // Retrieve new fields
+        admin.setAadharNumber(rs.getString("aadharNumber"));
+        admin.setPanNumber(rs.getString("panNumber"));
         return admin;
     }
 }
