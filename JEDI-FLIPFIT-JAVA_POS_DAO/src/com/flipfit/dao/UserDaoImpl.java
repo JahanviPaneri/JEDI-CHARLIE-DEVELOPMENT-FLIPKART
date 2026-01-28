@@ -11,23 +11,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class UserDaoImpl.
- * Implementation of UserDaoInterface providing database operations for User entities.
- *
- * @author FlipFit Development Team
- * @version 1.0
+ * Data Access implementation for core User operations using MySQL.
  */
 public class UserDaoImpl implements UserDaoInterface {
 
-    /**
-     * Adds the user to the database.
-     *
-     * @param user the user object to be added
-     */
     @Override
     public void addUser(User user) {
+        // Open connection and prepare the SQL statement to save a new user
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(SQLConstants.INSERT_USER)) {
 
@@ -38,22 +29,17 @@ public class UserDaoImpl implements UserDaoInterface {
             pstmt.setString(5, user.getPhoneNumber());
             pstmt.setString(6, user.getRole() != null ? user.getRole().getRoleName() : null);
 
+            // Execute the update to store user details in the database
             pstmt.executeUpdate();
             System.out.println("DAO: User registered successfully in DB with ID: " + user.getUserId());
         } catch (SQLException e) {
             System.err.println("Error adding user: " + e.getMessage());
-            e.printStackTrace();
         }
     }
 
-    /**
-     * Gets the user by id.
-     *
-     * @param userId the user id
-     * @return the user object if found, null otherwise
-     */
     @Override
     public User getUserById(String userId) {
+        // Fetch a specific user's details from the database using their ID
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(SQLConstants.SELECT_USER_BY_ID)) {
 
@@ -64,19 +50,14 @@ public class UserDaoImpl implements UserDaoInterface {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.err.println("Error fetching user by ID: " + e.getMessage());
         }
         return null;
     }
 
-    /**
-     * Gets the user by email.
-     *
-     * @param email the email address
-     * @return the user object if found, null otherwise
-     */
     @Override
     public User getUserByEmail(String email) {
+        // Look up a user profile in the database using their email address
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(SQLConstants.SELECT_USER_BY_EMAIL)) {
 
@@ -87,18 +68,14 @@ public class UserDaoImpl implements UserDaoInterface {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.err.println("Error fetching user by email: " + e.getMessage());
         }
         return null;
     }
 
-    /**
-     * Gets all users from the database.
-     *
-     * @return the list of all users
-     */
     @Override
     public List<User> getAllUsers() {
+        // Retrieve a list of every user registered in the system
         List<User> users = new ArrayList<>();
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(SQLConstants.SELECT_ALL_USERS);
@@ -108,19 +85,12 @@ public class UserDaoImpl implements UserDaoInterface {
                 users.add(mapResultSetToUser(rs));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.err.println("Error listing users: " + e.getMessage());
         }
         return users;
     }
 
-    /**
-     * Map result set to user.
-     * Helper method to convert database result set to User bean.
-     *
-     * @param rs the result set from database query
-     * @return the user object
-     * @throws SQLException the SQL exception
-     */
+    // Helper method to convert a database row into a User object
     private User mapResultSetToUser(ResultSet rs) throws SQLException {
         User user = new User();
         user.setUserId(rs.getString("userId"));

@@ -7,6 +7,9 @@ import com.flipfit.exception.InvalidCredentialsException;
 
 import java.util.List;
 
+/**
+ * Service implementation for shared user tasks like login and account management.
+ */
 public class UserService implements UserInterface {
 
     private UserDaoInterface userDao = new UserDaoImpl();

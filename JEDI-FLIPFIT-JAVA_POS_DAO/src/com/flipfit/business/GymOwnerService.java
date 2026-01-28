@@ -14,6 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * Service implementation for gym owners to manage their account and gym centers.
+ */
 public class GymOwnerService implements GymOwnerInterface {
 
     GymOwnerDaoInterface gymOwnerDao = new GymOwnerDaoImpl();
@@ -65,7 +68,8 @@ public class GymOwnerService implements GymOwnerInterface {
 
     @Override
     public void requestGymRemoval(String gymId) {
-        System.out.println("Requesting removal for gym: " + gymId);
+        // Send a request to the system to remove a specific gym center
+        System.out.println("Requesting removal for gym ID: " + gymId);
     }
 
     @Override
@@ -74,7 +78,8 @@ public class GymOwnerService implements GymOwnerInterface {
         tempGym.setGymId("123");
         tempGym.setGymLocation("Bangalore");
         tempGym.setGymName("Demo Gym");
-        List<GymCenter> tempList=new ArrayList<>();
+
+        List<GymCenter> tempList = new ArrayList<>();
         tempList.add(tempGym);
         return tempList;
     }

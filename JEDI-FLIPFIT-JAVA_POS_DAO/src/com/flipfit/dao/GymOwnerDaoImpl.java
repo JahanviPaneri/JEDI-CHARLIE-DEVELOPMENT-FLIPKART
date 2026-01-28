@@ -10,6 +10,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Data Access implementation for managing Gym Owners in memory.
+ */
 public class GymOwnerDaoImpl implements GymOwnerDaoInterface {
 
     @Override

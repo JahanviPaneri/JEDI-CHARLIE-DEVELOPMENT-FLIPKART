@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * Implementation of Admin operations for the FlipFit system.
+ */
 public class AdminService implements AdminInterface {
 
     @Override
@@ -65,7 +68,7 @@ public class AdminService implements AdminInterface {
         tempGym.setGymId("123");
         tempGym.setGymLocation("Bangalore");
         tempGym.setGymName("Demo Gym");
-        List<GymCenter> tempList=new ArrayList<>();
+        List<GymCenter> tempList = new ArrayList<>();
         tempList.add(tempGym);
         return tempList;
     }
@@ -75,7 +78,7 @@ public class AdminService implements AdminInterface {
         GymOwner owner = new GymOwner();
         owner.setOwnerId("1234");
         owner.setName("Demo owner");
-        List<GymOwner> ownerList=new ArrayList<>();
+        List<GymOwner> ownerList = new ArrayList<>();
         ownerList.add(owner);
         return ownerList;
     }

@@ -5,42 +5,17 @@ import com.flipfit.exception.RegistrationFailedException;
 import com.flipfit.exception.InvalidCredentialsException;
 import com.flipfit.exception.UserNotFoundException;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Interface CustomerInterface.
- * Defines business operations for customer management.
- *
- * @author FlipFit Development Team
- * @version 1.0
+ * Interface for customer actions like joining, logging in, and profile updates.
  */
 public interface CustomerInterface {
-    
-    /**
-     * Register customer.
-     *
-     * @param name the customer name
-     * @param email the customer email
-     * @param phoneNumber the phone number
-     * @param password the password
-     * @throws RegistrationFailedException the registration failed exception
-     */
+
+    // Create a new customer account in the system
     void registerCustomer(String name, String email, String phoneNumber, String password) throws RegistrationFailedException;
-    
-    /**
-     * Login.
-     *
-     * @param email the email
-     * @param password the password
-     * @return true, if successful
-     * @throws InvalidCredentialsException the invalid credentials exception
-     */
+
+    // Verify customer identity to allow access to the app
     boolean login(String email, String password) throws InvalidCredentialsException;
-    
-    /**
-     * Edits the profile.
-     *
-     * @param customer the customer
-     * @throws UserNotFoundException the user not found exception
-     */
+
+    // Update existing customer details like name or contact info
     void editProfile(Customer customer) throws UserNotFoundException;
 }

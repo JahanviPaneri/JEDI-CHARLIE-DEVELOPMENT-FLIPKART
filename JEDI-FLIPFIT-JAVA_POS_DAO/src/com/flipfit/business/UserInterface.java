@@ -3,6 +3,9 @@ package com.flipfit.business;
 import com.flipfit.bean.User;
 import com.flipfit.exception.InvalidCredentialsException;
 
+/**
+ * Interface for general user operations and account security.
+ */
 public interface UserInterface {
     /**
      * Registers a new user in the system.
@@ -20,5 +23,7 @@ public interface UserInterface {
     User login(String email, String password) throws InvalidCredentialsException;
 
     void updatePassword(String userId, String newPassword);
+
+    // Retrieve all profile information for a specific user ID
     User getUserDetails(String userId);
 }
