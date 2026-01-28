@@ -1,6 +1,6 @@
-package com.flipkart.dao;
+package com.flipfit.dao;
 
-import com.flipkart.bean.Customer;
+import com.flipfit.bean.Customer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

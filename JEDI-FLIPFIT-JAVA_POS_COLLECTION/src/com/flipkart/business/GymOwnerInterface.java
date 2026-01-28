@@ -1,7 +1,7 @@
-package com.flipkart.business;
+package com.flipfit.business;
 
-import com.flipkart.bean.GymOwner;
-import com.flipkart.bean.GymCenter;
+import com.flipfit.bean.GymOwner;
+import com.flipfit.bean.GymCenter;
 import java.util.List;
 
 public interface GymOwnerInterface {

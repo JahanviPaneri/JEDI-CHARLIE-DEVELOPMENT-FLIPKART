@@ -1,7 +1,7 @@
-package com.flipkart.dao;
+package com.flipfit.dao;
 
-import com.flipkart.bean.GymCenter;
-import com.flipkart.constants.GymStatus; // Assuming you have an Enum for status
+import com.flipfit.bean.GymCenter;
+import com.flipfit.constants.GymStatus; // Assuming you have an Enum for status
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

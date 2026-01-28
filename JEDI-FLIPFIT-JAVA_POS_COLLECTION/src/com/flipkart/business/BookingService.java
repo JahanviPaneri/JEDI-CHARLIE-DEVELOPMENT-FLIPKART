@@ -1,7 +1,7 @@
-package com.flipkart.business;
+package com.flipfit.business;
 
-import com.flipkart.bean.Booking;
-import com.flipkart.bean.Slot;
+import com.flipfit.bean.Booking;
+import com.flipfit.bean.Slot;
 
 import java.util.List;
 

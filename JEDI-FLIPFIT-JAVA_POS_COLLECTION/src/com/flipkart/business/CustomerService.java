@@ -1,7 +1,7 @@
-package com.flipkart.business;
+package com.flipfit.business;
 
-import com.flipkart.bean.Customer;
-import com.flipkart.bean.Role;
+import com.flipfit.bean.Customer;
+import com.flipfit.bean.Role;
 
 import java.util.UUID;
 

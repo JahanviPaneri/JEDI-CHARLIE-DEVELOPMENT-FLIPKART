@@ -1,6 +1,6 @@
-package com.flipkart.business;
+package com.flipfit.business;
 
-import com.flipkart.bean.Customer;
+import com.flipfit.bean.Customer;
 import java.util.List;
 
 public interface CustomerInterface {
