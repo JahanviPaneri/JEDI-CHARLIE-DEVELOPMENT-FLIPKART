@@ -28,4 +28,6 @@ public interface GymOwnerDaoInterface {
      * Removes an owner from the system
      */
     void deleteOwner(String ownerId);
+
+    List<GymOwner> getPendingOwners();
 }

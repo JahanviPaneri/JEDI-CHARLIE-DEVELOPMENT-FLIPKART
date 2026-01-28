@@ -23,7 +23,7 @@ public class GymOwnerService implements GymOwnerInterface {
     UserDaoInterface userDao = new UserDaoImpl();
 
     @Override
-    public void registerOwner(String name, String email , String phoneNumber, String password, String panNumber, String aadharNumber) {
+    public void registerOwner(String name, String email , String phoneNumber, String password, String panNumber, String accountNumber) {
         try {
             String userId = UUID.randomUUID().toString();
             String ownerId = UUID.randomUUID().toString();
@@ -41,7 +41,7 @@ public class GymOwnerService implements GymOwnerInterface {
             owner.setRole(role);
             // Setting new details
             owner.setPanNumber(panNumber);
-            owner.setAadharNumber(aadharNumber);
+            owner.setAccountNumber(accountNumber);
 
             User user = new User();
             user.setUserId(userId);

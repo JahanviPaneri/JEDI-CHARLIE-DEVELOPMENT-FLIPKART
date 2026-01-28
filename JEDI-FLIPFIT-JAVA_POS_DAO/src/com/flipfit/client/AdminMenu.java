@@ -24,10 +24,6 @@ public class AdminMenu {
             switch (choice) {
                 case 1:
                     List<GymOwner> owners = adminService.viewPendingOwners();
-                    System.out.println("\n--- Pending Gym Owners ---");
-                    for(GymOwner owner : owners){
-                        System.out.println("ID: " + owner.getOwnerId() + " | Name: " + owner.getName() + " | Email: " + owner.getEmail());
-                    }
                     break;
                 case 2:
                     System.out.println("Enter Owner ID to approve:");
@@ -36,10 +32,6 @@ public class AdminMenu {
                     break;
                 case 3:
                     List<GymCenter> gyms = adminService.viewPendingGyms();
-                    System.out.println("\n--- Pending Gym Centers ---");
-                    for(GymCenter g : gyms){
-                        System.out.println("ID: " + g.getGymId() + " | Name: " + g.getGymName() + " | Location: " + g.getGymLocation());
-                    }
                     break;
                 case 4:
                     System.out.println("Enter Gym ID to approve:");
