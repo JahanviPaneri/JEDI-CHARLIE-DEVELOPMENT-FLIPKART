@@ -3,10 +3,9 @@ package com.flipfit.dao;
 import com.flipfit.bean.GymCenter;
 import com.flipfit.bean.GymOwner;
 import com.flipfit.constant.SQLConstants;
+import com.flipfit.constants.GymStatus;
 import com.flipfit.constants.OwnerStatus;
 import com.flipfit.utils.DBConnection;
-
-import com.flipfit.constant.SQLConstants;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -50,10 +49,24 @@ public class GymOwnerDaoImpl implements GymOwnerDaoInterface {
 
     @Override
     public GymOwner getOwnerByEmail(String email) {
-        return ownerMap.values().stream()
-                .filter(owner -> owner.getEmail().equalsIgnoreCase(email))
-                .findFirst()
-                .orElse(null);
+        GymOwner owner = null;
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(SQLConstants.SELECT_GYM_OWNER_BY_EMAIL)) {
+
+            pstmt.setString(1, email);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                owner = new GymOwner();
+                owner.setOwnerId(rs.getString("ownerId"));
+                owner.setPanNumber(rs.getString("panNumber"));
+                owner.setAccountNumber(rs.getString("accountNumber"));
+                owner.setOwnerStatus(OwnerStatus.valueOf(rs.getString("status")));
+            }
+        } catch (SQLException e) {
+            System.err.println("Error fetching Gym Owner by email: " + e.getMessage());
+        }
+        return owner;
     }
 
     @Override
@@ -88,5 +101,29 @@ public class GymOwnerDaoImpl implements GymOwnerDaoInterface {
             System.out.println("Error fetching pending gym owners: " + e.getMessage());
         }
         return pendingOwners;
+    }
+
+    @Override
+    public List<GymCenter> getGymsByOwnerId(String ownerId) {
+        List<GymCenter> gyms = new ArrayList<>();
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(SQLConstants.SELECT_GYM_CENTERS_BY_OWNER)) {
+
+            pstmt.setString(1, ownerId);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                GymCenter gym = new GymCenter();
+                gym.setGymId(rs.getString("gymId"));
+                gym.setGymName(rs.getString("gymName"));
+                gym.setGymLocation(rs.getString("gymLocation"));
+                gym.setCapacity(rs.getInt("capacity"));
+                gym.setGymStatus(GymStatus.valueOf(rs.getString("status")));
+                gyms.add(gym);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error fetching gyms for owner: " + e.getMessage());
+        }
+        return gyms;
     }
 }

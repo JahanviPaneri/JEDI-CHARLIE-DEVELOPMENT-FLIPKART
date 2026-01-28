@@ -9,17 +9,19 @@ public class GymCenter {
     private String gymLocation;
     private GymStatus gymStatus;
     private String gymOwnerId;
+    private int capacity;
 
 
     public GymCenter(){}
 
 
-    public GymCenter(String gymId, String gymName, String gymLocation, GymStatus gymStatus, String gymOwnerId) {
+    public GymCenter(String gymId, String gymName, String gymLocation, GymStatus gymStatus, String gymOwnerId, int capacity) {
         this.gymId = gymId;
         this.gymName = gymName;
         this.gymLocation = gymLocation;
         this.gymStatus = gymStatus;
         this.gymOwnerId = gymOwnerId;
+        this.capacity = capacity;
     }
 
     public String getGymId() {
@@ -60,5 +62,13 @@ public class GymCenter {
 
     public void setGymOwnerId(String gymOwnerId) {
         this.gymOwnerId = gymOwnerId;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
 }

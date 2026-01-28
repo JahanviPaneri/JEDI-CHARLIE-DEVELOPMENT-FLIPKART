@@ -68,14 +68,24 @@ public class GymOwnerService implements GymOwnerInterface {
     }
 
     @Override
-    public List<GymCenter> viewMyGyms(String ownerId) {
-        GymCenter tempGym=new GymCenter();
-        tempGym.setGymId("123");
-        tempGym.setGymLocation("Bangalore");
-        tempGym.setGymName("Demo Gym");
-
-        List<GymCenter> tempList = new ArrayList<>();
-        tempList.add(tempGym);
-        return tempList;
+    public List<GymCenter> viewMyGyms(String email) {
+        System.out.println("Fetching gyms for email: " + email);
+        GymOwner owner = gymOwnerDao.getOwnerByEmail(email);
+        if (owner == null) {
+            System.out.println("No Gym Owner found for email: " + email);
+            return new ArrayList<>();
+        }
+        String ownerId = owner.getOwnerId();
+        System.out.println("Fetching gyms for ownerId: " + ownerId);
+        List<GymCenter> gyms = gymOwnerDao.getGymsByOwnerId(ownerId);
+        if (gyms.isEmpty()) {
+            System.out.println("No gyms found for ownerId: " + ownerId);
+        } else {
+            System.out.println("Gyms found for ownerId: " + ownerId);
+            for (GymCenter gym : gyms) {
+                System.out.println("Gym ID: " + gym.getGymId() + ", Name: " + gym.getGymName() + ", Location: " + gym.getGymLocation() + ", Capacity: " + gym.getCapacity() + ", Status: " + gym.getGymStatus());
+            }
+        }
+        return gyms;
     }
 }
