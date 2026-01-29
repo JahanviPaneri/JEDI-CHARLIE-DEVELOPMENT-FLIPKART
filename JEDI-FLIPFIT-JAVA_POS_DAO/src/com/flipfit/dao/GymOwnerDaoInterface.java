@@ -10,6 +10,8 @@ public interface GymOwnerDaoInterface {
      */
     void addGymOwner(GymOwner owner);
 
+    boolean updateOwnerStatusToApproved(String ownerId);
+
     /**
      * Retrieves an owner by their unique ID
      */
@@ -35,5 +37,6 @@ public interface GymOwnerDaoInterface {
     /**
      * Retrieves a list of gyms owned by a specific owner.
      */
-    List<GymCenter> getGymsByOwnerId(String ownerId);
+
+    List<GymCenter> getGymsByOwnerEmail(String email);
 }

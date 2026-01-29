@@ -87,8 +87,14 @@ public class AdminService implements AdminInterface {
 
     @Override
     public void approveGymOwner(String ownerId) {
-        // Logic: Update owner status to APPROVED
-        System.out.println("Admin approved Owner ID: " + ownerId);
+        // The Service Layer handles the business result
+        boolean success = gymOwnerDao.updateOwnerStatusToApproved(ownerId);
+
+        if (success) {
+            System.out.println("Service: Owner " + ownerId + " successfully moved from PENDING to APPROVED.");
+        } else {
+            System.out.println("Service: Approval failed. Owner might not exist or isn't in PENDING status.");
+        }
     }
 
     @Override
