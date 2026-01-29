@@ -1,6 +1,7 @@
 package com.flipfit.dao;
 
 import com.flipfit.bean.GymOwner;
+import com.flipfit.bean.GymCenter;
 import java.util.List;
 
 public interface GymOwnerDaoInterface {
@@ -30,4 +31,9 @@ public interface GymOwnerDaoInterface {
     void deleteOwner(String ownerId);
 
     List<GymOwner> getPendingOwners();
+    
+    /**
+     * Retrieves a list of gyms owned by a specific owner.
+     */
+    List<GymCenter> getGymsByOwnerId(String ownerId);
 }
