@@ -31,7 +31,7 @@ public class GymCenterDaoImpl implements GymCenterDaoInterface {
             pstmt.setString(1, gym.getGymId());
             pstmt.setString(2, gym.getGymName());
             pstmt.setString(3, gym.getGymLocation());
-            pstmt.setString(4, String.valueOf(gym.getGymStatus()));
+            pstmt.setString(4, "PENDING");
             pstmt.setString(5, gym.getGymOwnerId());
             pstmt.executeUpdate();
             System.out.println("DAO: Gym Owner registered in DB with status PENDING: " + gym.getGymId());

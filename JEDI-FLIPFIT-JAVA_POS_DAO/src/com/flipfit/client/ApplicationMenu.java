@@ -9,11 +9,21 @@ import com.flipfit.business.UserInterface;
 import com.flipfit.exception.RegistrationFailedException;
 import com.flipfit.exception.InvalidCredentialsException;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class ApplicationMenu {
 
     public static void main(String[] args) {
+        // Create Date-Time formatting
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formatDateTime = now.format(formatter);
+        // Assignment requirement: Welcome on left, Date/Time on right
+        System.out.print("Welcome to out website\n");
+        System.out.println("Time is: " + formatDateTime);
+
         Scanner scanner = new Scanner(System.in);
         System.out.println("=== Welcome to FlipFit Application ===");
 
@@ -24,6 +34,7 @@ public class ApplicationMenu {
                 System.out.println("3. Exit");
                 System.out.print("Enter your choice: ");
                 int choice = scanner.nextInt();
+
                 scanner.nextLine(); // Consume newline
 
                 switch (choice) {

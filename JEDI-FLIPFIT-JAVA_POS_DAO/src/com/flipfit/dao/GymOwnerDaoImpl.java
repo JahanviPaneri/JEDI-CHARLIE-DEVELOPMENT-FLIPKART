@@ -41,7 +41,22 @@ public class GymOwnerDaoImpl implements GymOwnerDaoInterface {
             e.printStackTrace();
         }
     }
+    @Override
+    public boolean updateOwnerStatusToApproved(String ownerId) {
+        // We use the constant here instead of a hardcoded string
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement statement = conn.prepareStatement(SQLConstants.APPROVE_GYM_OWNER_QUERY)) {
 
+            statement.setString(1, ownerId);
+
+            int rowsUpdated = statement.executeUpdate();
+            return rowsUpdated > 0;
+
+        } catch (SQLException e) {
+            System.err.println("Database error: " + e.getMessage());
+            return false;
+        }
+    }
     @Override
     public GymOwner getOwnerById(String ownerId) {
         return ownerMap.get(ownerId);
@@ -104,12 +119,13 @@ public class GymOwnerDaoImpl implements GymOwnerDaoInterface {
     }
 
     @Override
-    public List<GymCenter> getGymsByOwnerId(String ownerId) {
+    public List<GymCenter> getGymsByOwnerEmail(String email) {
         List<GymCenter> gyms = new ArrayList<>();
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(SQLConstants.SELECT_GYM_CENTERS_BY_OWNER)) {
 
-            pstmt.setString(1, ownerId);
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(SQLConstants.GET_GYMS_BY_OWNER_EMAIL)) {
+
+            pstmt.setString(1, email);
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
@@ -117,12 +133,12 @@ public class GymOwnerDaoImpl implements GymOwnerDaoInterface {
                 gym.setGymId(rs.getString("gymId"));
                 gym.setGymName(rs.getString("gymName"));
                 gym.setGymLocation(rs.getString("gymLocation"));
-                gym.setCapacity(rs.getInt("capacity"));
-                gym.setGymStatus(GymStatus.valueOf(rs.getString("status")));
+                gym.setGymStatus(GymStatus.valueOf(rs.getString("gymStatus")));
+                gym.setGymOwnerId(rs.getString("gymOwnerId"));
                 gyms.add(gym);
             }
         } catch (SQLException e) {
-            System.err.println("Error fetching gyms for owner: " + e.getMessage());
+            System.err.println("DAO Error: Could not fetch gyms for email " + email + " - " + e.getMessage());
         }
         return gyms;
     }

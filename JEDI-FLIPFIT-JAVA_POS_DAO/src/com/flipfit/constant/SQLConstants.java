@@ -63,12 +63,13 @@ public class SQLConstants {
 
     /** The SQL query to insert a new gym owner record. */
     public static final String INSERT_GYM_OWNER = "INSERT INTO GYM_OWNER (ownerId, accountNumber, panNumber, ownerStatus) VALUES (?, ?, ?, ?)";
-
+    public static final String APPROVE_GYM_OWNER_QUERY =
+            "UPDATE GYM_OWNER SET ownerStatus = 'APPROVED' WHERE ownerId = ? AND ownerStatus = 'PENDING'";
     /** The SQL query to select gym owner by ID. */
     public static final String SELECT_GYM_OWNER_BY_ID = "SELECT * FROM GYM_OWNER WHERE ownerId = ?";
 
     /** The SQL query to select gym owner by email. */
-    public static final String SELECT_GYM_OWNER_BY_EMAIL = "SELECT * FROM GYM_OWNER WHERE email = ?";
+    public static final String SELECT_GYM_OWNER_BY_EMAIL = "SELECT * FROM GYM_CENTER WHERE gymOwnerId = ?";
 
     /** The SQL query to select all gym owners. */
     public static final String SELECT_ALL_GYM_OWNERS = "SELECT * FROM GYM_OWNER";
@@ -86,13 +87,13 @@ public class SQLConstants {
     // ======================== GYM CENTER QUERIES ========================
 
     /** The SQL query to insert a new gym center record. */
-    public static final String INSERT_GYM_CENTER = "INSERT INTO GYM_CENTER (gymId,gymName,gymLocation,gymStatus and gymOwnerId) VALUES (?, ?, ?, ?, ?)";
-
+    public static final String INSERT_GYM_CENTER =
+            "INSERT INTO GYM_CENTER (gymId, gymName, gymLocation, gymStatus, gymOwnerId) VALUES (?, ?, ?, ?, ?)";
     /** The SQL query to select gym center by ID. */
     public static final String SELECT_GYM_CENTER_BY_ID = "SELECT * FROM GYM_CENTER WHERE gymId = ?";
 
     /** The SQL query to select gym centers by owner ID. */
-    public static final String SELECT_GYM_CENTERS_BY_OWNER = "SELECT * FROM GYM_CENTER WHERE ownerId = ?";
+    public static final String SELECT_GYM_CENTERS_BY_OWNER = "SELECT * FROM GYM_CENTER WHERE gymOwnerId = ?";
 
     /** The SQL query to select all gym centers. */
     public static final String SELECT_ALL_GYM_CENTERS = "SELECT * FROM GYM_CENTER";
@@ -110,6 +111,8 @@ public class SQLConstants {
     /** Query to update status upon approval */
     public static final String APPROVE_GYM_CENTER_QUERY =
             "UPDATE GYM_CENTER SET status = 'APPROVED' WHERE gymId = ?";
+    public static final String GET_GYMS_BY_OWNER_EMAIL =
+            "SELECT * FROM GYM_CENTER where gymOwnerId = ? ";
 
     // ======================== SLOT QUERIES ========================
 
