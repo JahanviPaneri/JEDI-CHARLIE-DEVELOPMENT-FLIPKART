@@ -22,7 +22,7 @@ public interface UserInterface {
      */
     User login(String email, String password,String role) throws InvalidCredentialsException;
 
-    void updatePassword(String userId, String newPassword);
+    void updatePassword(String email, String password , String role , String newPassword) throws InvalidCredentialsException;
 
     // Retrieve all profile information for a specific user ID
     User getUserDetails(String userId);

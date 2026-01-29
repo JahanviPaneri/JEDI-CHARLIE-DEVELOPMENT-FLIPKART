@@ -105,4 +105,29 @@ public class UserDaoImpl implements UserDaoInterface {
 
         return user;
     }
+
+
+    public void updatePassword(User user) {
+        // Reference the constant you already created: UPDATE_USER_PASSWORD
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(SQLConstants.UPDATE_USER_PASSWORD)) {
+
+            // Set the parameters based on your query:
+            // "UPDATE User SET passwordHash = ? WHERE userId = ?"
+            pstmt.setString(1, user.getPasswordHash());
+            pstmt.setString(2, user.getUserId());
+
+            int rowsUpdated = pstmt.executeUpdate();
+
+            if (rowsUpdated > 0) {
+                System.out.println("Password updated successfully for user: " + user.getUserId());
+            } else {
+                System.out.println("No user found with ID: " + user.getUserId());
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error updating password: " + e.getMessage());
+        }
+    }
+
 }

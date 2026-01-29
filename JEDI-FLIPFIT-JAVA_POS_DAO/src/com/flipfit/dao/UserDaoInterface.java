@@ -29,4 +29,6 @@ public interface UserDaoInterface {
      * @return List of User objects
      */
     List<User> getAllUsers();
+
+    void updatePassword(User user);
 }

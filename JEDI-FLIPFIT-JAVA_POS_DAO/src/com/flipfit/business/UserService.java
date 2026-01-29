@@ -39,10 +39,23 @@ public class UserService implements UserInterface {
     }
 
     @Override
-    public void updatePassword(String userId, String newPassword) {
+    public void updatePassword (String email, String role,String password ,String updatedPassword) throws InvalidCredentialsException{
         // Implementation logic for password update
         // userDao.updatePassword(userId, newPassword);
-        System.out.println("Password updated.");
+
+        User user = userDao.getUserByEmail(email);
+
+        if (user == null || !user.getPasswordHash().equals(password)) {
+            throw new InvalidCredentialsException("Invalid email or password.");
+        }
+
+        if (role == null || !user.getRole().getRoleName().equals(role)) {
+            throw new InvalidCredentialsException("role not found.");
+        }
+
+        user.setPasswordHash(updatedPassword);
+        userDao.updatePassword(user);
+
     }
 
     @Override

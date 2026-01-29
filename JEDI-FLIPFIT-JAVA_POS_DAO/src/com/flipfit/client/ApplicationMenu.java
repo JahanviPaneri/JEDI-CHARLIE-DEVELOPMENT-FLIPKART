@@ -9,6 +9,8 @@ import com.flipfit.business.UserInterface;
 import com.flipfit.exception.RegistrationFailedException;
 import com.flipfit.exception.InvalidCredentialsException;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class ApplicationMenu {
@@ -21,7 +23,8 @@ public class ApplicationMenu {
             try {
                 System.out.println("\n1. Login");
                 System.out.println("2. Register User");
-                System.out.println("3. Exit");
+                System.out.println("3. Update Password");
+                System.out.println("4. Exit");
                 System.out.print("Enter your choice: ");
                 int choice = scanner.nextInt();
                 scanner.nextLine(); // Consume newline
@@ -34,6 +37,8 @@ public class ApplicationMenu {
                         registerUserFlow(scanner);
                         break;
                     case 3:
+                        updatePassword(scanner);
+                    case 4:
                         System.out.println("Exiting Application... Thank you!");
                         scanner.close();
                         System.exit(0);
@@ -109,7 +114,7 @@ public class ApplicationMenu {
             }
 
             String roleName = user.getRole().getRoleName();
-            System.out.println("Logged in as: " + roleName);
+            System.out.println("Logged in as: " + roleName + " | Login Time: " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")));
 
             if ("Admin".equalsIgnoreCase(roleName)) {
                 new AdminMenu().showMenu();
@@ -127,5 +132,29 @@ public class ApplicationMenu {
             System.err.println("Error during login: " + e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    private static void updatePassword(Scanner scanner) {
+            System.out.println("\n=== User Login ===");
+            System.out.print("Enter Email: ");
+            String email = scanner.nextLine();
+            System.out.print("Enter Password: ");
+            String password = scanner.nextLine();
+            System.out.println("Enter Role: ");
+            String role = scanner.nextLine();
+            System.out.println("Enter new password");
+            String newPassword = scanner.nextLine();
+            UserInterface userService = new UserService();
+
+            try{
+                userService.updatePassword(email, password,role,newPassword);
+            }
+            catch(InvalidCredentialsException e){
+                System.out.println();
+            }
+
+
+
+
     }
 }
