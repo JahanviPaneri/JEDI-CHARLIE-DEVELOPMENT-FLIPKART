@@ -86,7 +86,7 @@ public class SQLConstants {
     // ======================== GYM CENTER QUERIES ========================
 
     /** The SQL query to insert a new gym center record. */
-    public static final String INSERT_GYM_CENTER = "INSERT INTO GYM_CENTER (gymId, name, location, ownerId, capacity, status) VALUES (?, ?, ?, ?, ?, ?)";
+    public static final String INSERT_GYM_CENTER = "INSERT INTO GYM_CENTER (gymId,gymName,gymLocation,gymStatus and gymOwnerId) VALUES (?, ?, ?, ?, ?)";
 
     /** The SQL query to select gym center by ID. */
     public static final String SELECT_GYM_CENTER_BY_ID = "SELECT * FROM GYM_CENTER WHERE gymId = ?";

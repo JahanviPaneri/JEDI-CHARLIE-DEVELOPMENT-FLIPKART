@@ -24,9 +24,22 @@ public class GymCenterDaoImpl implements GymCenterDaoInterface {
 
     @Override
     public void addGymCenter(GymCenter gym) {
-        // Storing in map using gymId as the key
-        gymCenterMap.put(gym.getGymId(), gym);
-        System.out.println("DAO: Gym '" + gym.getGymName() + "' registered in the system.");
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(SQLConstants.INSERT_GYM_CENTER)) {
+
+            // Mapping GymOwner bean fields to SQL query parameters
+            pstmt.setString(1, gym.getGymId());
+            pstmt.setString(2, gym.getGymName());
+            pstmt.setString(3, gym.getGymLocation());
+            pstmt.setString(4, String.valueOf(gym.getGymStatus()));
+            pstmt.setString(5, gym.getGymOwnerId());
+            pstmt.executeUpdate();
+            System.out.println("DAO: Gym Owner registered in DB with status PENDING: " + gym.getGymId());
+
+        } catch (SQLException e) {
+            System.err.println("Error registering gym owner: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     @Override

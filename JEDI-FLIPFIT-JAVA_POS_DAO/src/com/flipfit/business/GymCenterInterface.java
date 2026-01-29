@@ -9,6 +9,8 @@ import java.util.List;
  */
 public interface GymCenterInterface {
 
+    void registerGym(String ownerId, String gymName, String gymLocation);
+
     // Add a new workout time slot to a specific gym center
     void addSlot(String gymId, Slot slot);
 

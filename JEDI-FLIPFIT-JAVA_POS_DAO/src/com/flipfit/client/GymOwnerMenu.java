@@ -7,6 +7,7 @@ import com.flipfit.business.GymCenterService;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.UUID;
 
 public class GymOwnerMenu {
     Scanner scanner = new Scanner(System.in);
@@ -24,7 +25,11 @@ public class GymOwnerMenu {
 
             switch (choice) {
                 case 1:
-                    addGym(ownerId);
+                    System.out.println("Enter Gym Name:");
+                    String gymName = scanner.next();
+                    System.out.println("Enter Gym Location:");
+                    String gymLocation = scanner.next();
+                    gymService.registerGym(ownerId,gymName,gymLocation);
                     break;
                 case 2:
                     addSlot();
@@ -41,19 +46,7 @@ public class GymOwnerMenu {
         }
     }
 
-    private void addGym(String ownerId) {
-        System.out.println("Enter Gym Name:");
-        String name = scanner.next();
-        System.out.println("Enter Location:");
-        String loc = scanner.next();
 
-        GymCenter gym = new GymCenter();
-        gym.setGymName(name);
-        gym.setGymLocation(loc);
-        gym.setGymOwnerId(ownerId);
-
-        ownerService.requestGymAddition(gym);
-    }
 
     private void addSlot() {
         System.out.println("Enter Gym ID:");

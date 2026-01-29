@@ -26,12 +26,13 @@ public class UserService implements UserInterface {
         User user = userDao.getUserByEmail(email);
 
         // 2. Check if user exists and password matches
-        if (user == null || !user.getPasswordHash().equals(password)) {
-            throw new InvalidCredentialsException("Invalid email or password.");
-        }
         if (role == null || !user.getRole().getRoleName().equals(role)) {
             throw new InvalidCredentialsException("role not found.");
         }
+        if (user == null || !user.getPasswordHash().equals(password)) {
+            throw new InvalidCredentialsException("Invalid email or password.");
+        }
+
 
         // 3. Return the authenticated user (including Role)
         System.out.println("Login successful for: " + user.getName() + " [" + user.getRole().getRoleName() + "]");

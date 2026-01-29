@@ -2,14 +2,33 @@ package com.flipfit.business;
 
 import com.flipfit.bean.GymCenter;
 import com.flipfit.bean.Slot;
+import com.flipfit.dao.GymCenterDaoImpl;
+import com.flipfit.dao.GymCenterDaoInterface;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+import java.util.UUID;
 
 /**
  * Service implementation for managing gym facilities and their workout schedules.
  */
 public class GymCenterService implements GymCenterInterface {
+    Scanner scanner = new Scanner(System.in);
+    GymOwnerService ownerService = new GymOwnerService();
+    GymCenterDaoInterface gymCenterDao = new GymCenterDaoImpl();
+    @Override
+    public void registerGym(String ownerId, String gymName, String gymLocation) {
+        String gymId = UUID.randomUUID().toString();
 
+        GymCenter gym = new GymCenter();
+        gym.setGymId(gymId);
+        gym.setGymName(gymName);
+        gym.setGymLocation(gymLocation);
+        gym.setGymOwnerId(ownerId);
+        gymCenterDao.addGymCenter(gym);
+        ownerService.requestGymAddition(gym);
+    }
     @Override
     public void addSlot(String gymId, Slot slot) {
         // Create a new time slot for workouts at a specific gym center
