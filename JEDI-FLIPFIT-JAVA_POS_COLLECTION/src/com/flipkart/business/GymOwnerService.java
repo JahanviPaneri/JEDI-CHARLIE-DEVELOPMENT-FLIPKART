@@ -1,10 +1,10 @@
-package com.flipkart.business;
+package com.flipfit.business;
 
-import com.flipkart.bean.Customer;
-import com.flipkart.bean.GymOwner;
-import com.flipkart.bean.GymCenter;
-import com.flipkart.bean.Role;
-import com.flipkart.constants.GymStatus;
+import com.flipfit.bean.Customer;
+import com.flipfit.bean.GymOwner;
+import com.flipfit.bean.GymCenter;
+import com.flipfit.bean.Role;
+import com.flipfit.constants.GymStatus;
 
 import java.util.ArrayList;
 import java.util.List;

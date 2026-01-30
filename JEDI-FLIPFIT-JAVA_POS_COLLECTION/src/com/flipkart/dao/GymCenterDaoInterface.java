@@ -1,6 +1,6 @@
-package com.flipkart.dao;
+package com.flipfit.dao;
 
-import com.flipkart.bean.GymCenter;
+import com.flipfit.bean.GymCenter;
 import java.util.List;
 
 public interface GymCenterDaoInterface {

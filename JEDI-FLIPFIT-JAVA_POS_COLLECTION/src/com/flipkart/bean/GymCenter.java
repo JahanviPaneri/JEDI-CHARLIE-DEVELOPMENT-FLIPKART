@@ -1,6 +1,6 @@
-package com.flipkart.bean;
+package com.flipfit.bean;
 
-import com.flipkart.constants.GymStatus;
+import com.flipfit.constants.GymStatus;
 
 public class GymCenter {
 

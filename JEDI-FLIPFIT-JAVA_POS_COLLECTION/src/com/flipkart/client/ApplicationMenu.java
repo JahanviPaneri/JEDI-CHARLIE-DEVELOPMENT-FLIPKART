@@ -1,7 +1,7 @@
-package com.flipkart.client;
+package com.flipfit.client;
 
-import com.flipkart.business.CustomerService;
-import com.flipkart.business.GymOwnerService;
+import com.flipfit.business.CustomerService;
+import com.flipfit.business.GymOwnerService;
 
 import java.util.Scanner;
 

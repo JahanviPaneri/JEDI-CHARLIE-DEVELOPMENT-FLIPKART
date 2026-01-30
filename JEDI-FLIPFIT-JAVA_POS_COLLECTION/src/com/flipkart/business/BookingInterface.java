@@ -1,6 +1,6 @@
-package com.flipkart.business;
+package com.flipfit.business;
 
-import com.flipkart.bean.Booking;
+import com.flipfit.bean.Booking;
 import java.util.List;
 
 public interface BookingInterface {

@@ -1,6 +1,6 @@
-package com.flipkart.dao;
+package com.flipfit.dao;
 
-import com.flipkart.bean.Booking;
+import com.flipfit.bean.Booking;
 import java.util.List;
 
 public interface BookingDaoInterface {

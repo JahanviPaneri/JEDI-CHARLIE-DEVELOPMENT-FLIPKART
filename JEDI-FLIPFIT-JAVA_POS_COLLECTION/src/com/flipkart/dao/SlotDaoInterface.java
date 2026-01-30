@@ -1,6 +1,6 @@
-package com.flipkart.dao;
+package com.flipfit.dao;
 
-import com.flipkart.bean.Slot;
+import com.flipfit.bean.Slot;
 import java.util.List;
 
 public interface SlotDaoInterface {

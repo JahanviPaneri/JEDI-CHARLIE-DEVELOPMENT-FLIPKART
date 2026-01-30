@@ -1,9 +1,9 @@
-package com.flipkart.client;
+package com.flipfit.client;
 
-import com.flipkart.business.BookingService;
-import com.flipkart.business.GymCenterService;
-import com.flipkart.bean.GymCenter;
-import com.flipkart.bean.Slot;
+import com.flipfit.business.BookingService;
+import com.flipfit.business.GymCenterService;
+import com.flipfit.bean.GymCenter;
+import com.flipfit.bean.Slot;
 import java.util.List;
 import java.util.Scanner;
 

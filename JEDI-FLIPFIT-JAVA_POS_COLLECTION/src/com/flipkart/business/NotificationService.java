@@ -1,4 +1,4 @@
-package com.flipkart.business;
+package com.flipfit.business;
 
 public class NotificationService implements NotificationInterface {
     @Override
