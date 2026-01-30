@@ -184,6 +184,4 @@ public class SQLConstants {
 
     /** The SQL query to delete waitlist entry. */
     public static final String DELETE_WAITLIST_ENTRY = "DELETE FROM Waitlist WHERE waitlistId = ?";
-
-
 }
