@@ -133,7 +133,10 @@ public class GymOwnerDaoImpl implements GymOwnerDaoInterface {
                 gym.setGymId(rs.getString("gymId"));
                 gym.setGymName(rs.getString("gymName"));
                 gym.setGymLocation(rs.getString("gymLocation"));
-                gym.setGymStatus(GymStatus.valueOf(rs.getString("gymStatus")));
+                String statusFromDB = rs.getString("gymStatus");
+                if (statusFromDB != null) {
+                    gym.setGymStatus(GymStatus.valueOf(statusFromDB.toUpperCase()));
+                }
                 gym.setGymOwnerId(rs.getString("gymOwnerId"));
                 gyms.add(gym);
             }

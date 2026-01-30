@@ -1,11 +1,17 @@
 package com.flipfit.dao;
 
 import com.flipfit.bean.Slot;
+import com.flipfit.constant.SQLConstants;
+import com.flipfit.utils.DBConnection;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * Data Access implementation for managing gym workout slots in memory.
@@ -54,11 +60,29 @@ public class SlotDaoImpl implements SlotDaoInterface {
     }
 
     @Override
-    public List<Slot> getSlotsByGymId(String gymId) {
-        // Retrieve all workout timings associated with a specific gym center
-        return slotMap.values().stream()
-                .filter(slot -> slot.getGymId().equals(gymId))
-                .collect(Collectors.toList());
+    public Slot getSlotByDetails(String gymId) {
+        Slot slot = null;
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(SQLConstants.SELECT_SLOT_BY_CRITERIA)) {
+
+            stmt.setString(1, gymId);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    slot = new Slot();
+                    slot.setSlotId(rs.getString("slotId"));
+                    slot.setGymId(rs.getString("gymId"));
+                    slot.setStartTime(rs.getString("startTime"));
+                    slot.setEndTime(rs.getString("endTime"));
+                    slot.setDate(rs.getString("date"));
+                    slot.setTotalCapacity(rs.getInt("totalCapacity"));
+                    slot.setAvailableCapacity(rs.getInt("availableCapacity"));
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Database error while fetching slot: " + e.getMessage());
+        }
+        return slot; // Returns null if not found
     }
 
     @Override

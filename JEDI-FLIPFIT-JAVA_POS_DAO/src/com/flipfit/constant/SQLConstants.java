@@ -10,8 +10,12 @@ package com.flipfit.constant;
  * @version 1.0
  */
 public class SQLConstants {
+    public static final String SELECT_SLOT_BY_CRITERIA =
+            "SELECT * FROM SLOT WHERE gymId = ?";
 
     // ======================== ADMIN QUERIES ========================
+    public static final String SELECT_APPROVED_CENTERS =
+            "SELECT * FROM GYM_CENTER WHERE gymStatus = 'APPROVED'";
 
     /** The SQL query to insert a new admin record. */
     public static final String INSERT_ADMIN = "INSERT INTO ADMIN (adminId, name, email, userId,aadharNumber,panNumber) VALUES (?, ?, ?, ?,?,?)";
@@ -99,7 +103,7 @@ public class SQLConstants {
     public static final String SELECT_ALL_GYM_CENTERS = "SELECT * FROM GYM_CENTER";
 
     /** The SQL query to update gym center status. */
-    public static final String UPDATE_GYM_CENTER_STATUS = "UPDATE GYM_CENTER SET status = ? WHERE gymId = ?";
+    public static final String UPDATE_GYM_CENTER_STATUS = "UPDATE GYM_CENTER SET gymStatus = 'APPROVED' WHERE gymId = ?";
 
     /** The SQL query to update gym center details. */
     public static final String UPDATE_GYM_CENTER = "UPDATE GYM_CENTER SET name = ?, location = ?, capacity = ? WHERE gymId = ?";

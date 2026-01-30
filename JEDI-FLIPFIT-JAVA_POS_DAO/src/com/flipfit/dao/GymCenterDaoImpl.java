@@ -53,12 +53,18 @@ public class GymCenterDaoImpl implements GymCenterDaoInterface {
     }
 
     @Override
-    public void changeGymCenterStatus(String gymId, String status) {
-        GymCenter gym = gymCenterMap.get(gymId);
-        if (gym != null) {
-            // Update status logic (adjust based on your Bean/Enum implementation)
-            // gym.setGymStatus(GymStatus.valueOf(status));
-            System.out.println("DAO: Status for " + gymId + " updated to " + status);
+    public boolean changeGymCenterStatus(String gymId) {
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement statement = conn.prepareStatement(SQLConstants.UPDATE_GYM_CENTER_STATUS)) {
+
+            statement.setString(1, gymId);
+
+            int rowsUpdated = statement.executeUpdate();
+            return rowsUpdated > 0;
+
+        } catch (SQLException e) {
+            System.err.println("Database error: " + e.getMessage());
+            return false;
         }
     }
 
@@ -97,8 +103,23 @@ public class GymCenterDaoImpl implements GymCenterDaoInterface {
     }
 
     @Override
-    public List<GymCenter> getAllGymCenters() {
-        // Converting Map values to a List for the return type
-        return new ArrayList<>(gymCenterMap.values());
+    public List<GymCenter> getAllApprovedCenters() {
+        List<GymCenter> centers = new ArrayList<>();
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(SQLConstants.SELECT_APPROVED_CENTERS);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                GymCenter gym = new GymCenter();
+                gym.setGymId(rs.getString("gymId"));
+                gym.setGymName(rs.getString("gymName"));
+                gym.setGymLocation(rs.getString("gymLocation"));
+                centers.add(gym);
+            }
+        } catch (SQLException e) {
+            System.err.println("DAO Error: " + e.getMessage());
+        }
+        return centers;
     }
 }

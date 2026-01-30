@@ -21,7 +21,8 @@ public interface GymCenterInterface {
     List<GymCenter> viewAllCenters();
 
     // Get all slots that are currently open for booking at a specific gym
-    List<Slot> getAvailableSlots(String gymId);
+
+    Slot getAvailableSlots(String gymId);
 
     // Update information like name, location, or capacity for a gym
     void updateGymDetails(GymCenter gym);

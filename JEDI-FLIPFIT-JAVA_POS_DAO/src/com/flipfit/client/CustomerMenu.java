@@ -21,31 +21,23 @@ public class CustomerMenu {
             System.out.println("4. Cancel a Booking");
             System.out.println("5. View My Bookings");
             System.out.println("6. Logout");
-
+            String date;
             int choice = scanner.nextInt();
 
             switch (choice) {
                 case 1:
                     List<GymCenter> centers = gymService.viewAllCenters();
-                    System.out.println("ID\tName\tLocation");
-                    for(GymCenter g : centers) {
-                        System.out.println(g.getGymId() + "\t" + g.getGymName() + "\t" + g.getGymLocation());
-                    }
+                    System.out.println("--- List of Approved Gym Centers ---");
+                    centers.forEach(gym -> System.out.println(
+                            "ID: " + gym.getGymId() +
+                                    " | Name: " + gym.getGymName() +
+                                    " | Location: " + gym.getGymLocation()
+                    ));
                     break;
                 case 2:
-
                     System.out.println("Enter Gym ID:");
                     String gymId = scanner.next();
-                    List<Slot> slots = gymService.getAvailableSlots(gymId);
-
-                    for(Slot s:slots){
-                        System.out.println("slot id --> " +s.getSlotId());
-                        System.out.println("start time --> " +s.getStartTime());
-                        System.out.println("Date --> " +s.getDate());
-                        System.out.println("total capacity --> " +s.getTotalCapacity());
-                        System.out.println("available capacity--> " +s.getAvailableCapacity());
-                    }
-
+                    gymService.getAvailableSlots(gymId);
                     break;
                 case 3:
                     System.out.println("Enter Gym ID:");
@@ -53,7 +45,7 @@ public class CustomerMenu {
                     System.out.println("Enter Slot ID:");
                     String slotId = scanner.next();
                     System.out.println("Enter Date (DD/MM/YYYY):");
-                    String date = scanner.next();
+                    date = scanner.next();
                     bookingService.makeBooking(userId, gId, slotId, date);
                     break;
 

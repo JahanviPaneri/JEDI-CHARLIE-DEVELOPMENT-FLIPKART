@@ -36,9 +36,20 @@ public class GymOwnerMenu {
                     break;
                 case 3:
                     List<GymCenter>gyms= ownerService.viewMyGyms(ownerId);
-                    for(GymCenter g:gyms){
-                        System.out.println("GymId ->" + g.getGymId() + " GymLocation ->" +g.getGymName() + " GymName -->" + g.getGymName());
+                    // Print the Table Header
+                    System.out.println("\n" + "=".repeat(65));
+                    System.out.printf("%-10s | %-25s | %-20s%n", "GYM ID", "GYM NAME", "LOCATION");
+                    System.out.println("-".repeat(65));
+
+// Print the Table Rows
+                    for (GymCenter g : gyms) {
+                        System.out.printf("%-10s | %-25s | %-20s%n",
+                                g.getGymId(),
+                                g.getGymName(),
+                                g.getGymLocation());
                     }
+
+                    System.out.println("=".repeat(65) + "\n");
                     break;
                 case 4:
                     return;

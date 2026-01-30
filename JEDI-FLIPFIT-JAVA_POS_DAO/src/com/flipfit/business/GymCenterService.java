@@ -4,8 +4,9 @@ import com.flipfit.bean.GymCenter;
 import com.flipfit.bean.Slot;
 import com.flipfit.dao.GymCenterDaoImpl;
 import com.flipfit.dao.GymCenterDaoInterface;
+import com.flipfit.dao.SlotDaoImpl;
+import com.flipfit.dao.SlotDaoInterface;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
@@ -41,30 +42,40 @@ public class GymCenterService implements GymCenterInterface {
         System.out.println("Removing slot ID: " + slotId);
     }
 
-    @Override
-    public List<GymCenter> viewAllCenters() {
-        // Retrieve all gym centers that have been verified and approved by the admin
-        GymCenter tempGym = new GymCenter();
-        tempGym.setGymId("123");
-        tempGym.setGymLocation("Bangalore");
-        tempGym.setGymName("Demo Gym");
-        List<GymCenter> tempList = new ArrayList<>();
-        tempList.add(tempGym);
-        return tempList;
-    }
+    private GymCenterDaoInterface gymCenterDAO = new GymCenterDaoImpl();
 
     @Override
-    public List<Slot> getAvailableSlots(String gymId) {
-        // Get all workout timings that still have open spaces for customers
-        Slot slot = new Slot();
-        slot.setSlotId("321");
-        slot.setAvailableCapacity(120);
-        slot.setTotalCapacity(200);
-        slot.setStartTime("8 AM");
-        slot.setDate("30-1-2026");
-        List<Slot> slotList = new ArrayList<>();
-        slotList.add(slot);
-        return slotList;
+    public List<GymCenter> viewAllCenters() {
+        // Business Logic: Retrieve only verified/approved centers
+        List<GymCenter> approvedCenters = gymCenterDAO.getAllApprovedCenters();
+
+        if (approvedCenters.isEmpty()) {
+            System.out.println("Notice: No approved gym centers found in the system.");
+        }
+
+        return approvedCenters;
+    }
+
+    private SlotDaoInterface slotDAO = new SlotDaoImpl();
+
+    @Override
+    public Slot getAvailableSlots(String gymId) {
+        // 1. Try to find the slot in the database
+        Slot existingSlot = slotDAO.getSlotByDetails(gymId);
+
+        // 2. Logic: If not present in table, mark it as available/create default
+        if (existingSlot == null) {
+            Slot defaultSlot = new Slot();
+            defaultSlot.setSlotId("N/A"); // Indicates it's not a DB record yet
+
+            // Default capacities for a new/untracked slot
+            defaultSlot.setTotalCapacity(100);
+            defaultSlot.setAvailableCapacity(100);
+
+            return defaultSlot;
+        }
+
+        return existingSlot;
     }
 
     @Override

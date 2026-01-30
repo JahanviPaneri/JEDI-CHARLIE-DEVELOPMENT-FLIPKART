@@ -81,8 +81,13 @@ public class AdminService implements AdminInterface {
     }
     @Override
     public void approveGymCenter(String gymId) {
-        // Logic: Update gym status to APPROVED in DB
-        System.out.println("Admin approved Gym ID: " + gymId);
+        boolean success = gymCenterDao.changeGymCenterStatus(gymId);
+
+        if (success) {
+            System.out.println("Service: GYM " + gymId + " successfully moved from PENDING to APPROVED.");
+        } else {
+            System.out.println("Service: Approval failed. Gym might not exist or isn't in PENDING status.");
+        }
     }
 
     @Override

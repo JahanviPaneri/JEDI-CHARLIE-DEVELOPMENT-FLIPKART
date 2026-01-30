@@ -17,14 +17,14 @@ public interface SlotDaoInterface {
     // Retrieve the full details of a specific slot by its ID
     Slot getSlotById(String slotId);
 
-    // Get all time slots belonging to a particular gym center
-    List<Slot> getSlotsByGymId(String gymId);
 
     // Update the number of remaining spots after a booking or cancellation
     void changeAvailableCapacity(String slotId, int newAvailableCapacity);
 
     // Update the maximum allowed capacity for a specific workout session
     void changeTotalCapacity(String slotId, int newTotalCapacity);
+
+    Slot getSlotByDetails(String gymId);
 
     // Retrieve a complete list of every workout slot in the system
     List<Slot> getAllSlots();
