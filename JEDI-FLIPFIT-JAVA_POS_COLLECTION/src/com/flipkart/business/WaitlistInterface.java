@@ -1,6 +1,6 @@
-package com.flipkart.business;
+package com.flipfit.business;
 
-import com.flipkart.bean.Waitlist;
+import com.flipfit.bean.Waitlist;
 import java.util.List;
 
 public interface WaitlistInterface {

@@ -1,8 +1,8 @@
-package com.flipkart.business;
+package com.flipfit.business;
 
-import com.flipkart.bean.GymCenter;
-import com.flipkart.bean.GymOwner;
-import com.flipkart.constants.GymStatus;
+import com.flipfit.bean.GymCenter;
+import com.flipfit.bean.GymOwner;
+import com.flipfit.constants.GymStatus;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +34,6 @@ public class AdminService implements AdminInterface {
 
     @Override
     public List<GymOwner> viewPendingOwners() {
-
         GymOwner owner = new GymOwner();
         owner.setOwnerId("1234");
         owner.setName("Demo owner");
