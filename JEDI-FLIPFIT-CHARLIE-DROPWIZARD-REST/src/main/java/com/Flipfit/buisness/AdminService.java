@@ -23,7 +23,7 @@ public class AdminService implements AdminInterface {
         user.setEmail(email);
         user.setPhoneNumber(phoneNumber);
         user.setPasswordHash(password);
-        user.setRole(adminRole);
+        user.setRole(String.valueOf(adminRole));
 
         Admin admin = new Admin();
         admin.setUserId(userId);
@@ -32,7 +32,7 @@ public class AdminService implements AdminInterface {
         admin.setEmail(email);
         admin.setPhoneNumber(phoneNumber);
         admin.setPasswordHash(password);
-        admin.setRole(adminRole);
+        admin.setRole(String.valueOf(adminRole));
 
         userDao.addUser(user);
         adminDao.addAdmin(admin);

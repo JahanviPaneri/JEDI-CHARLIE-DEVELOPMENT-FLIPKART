@@ -39,7 +39,7 @@ public class CustomerService implements CustomerInterface {
         user.setEmail(email);
         user.setPhoneNumber(phoneNumber);
         user.setPasswordHash(password);
-        user.setRole(customerRole);
+        user.setRole(String.valueOf(customerRole));
 
         userDao.addUser(user);
         customerDao.addCustomer(customer);

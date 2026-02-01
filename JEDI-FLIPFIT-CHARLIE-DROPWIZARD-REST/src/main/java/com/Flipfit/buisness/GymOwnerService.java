@@ -25,7 +25,7 @@ public class GymOwnerService implements GymOwnerInterface {
 
         Role role = new Role();
         role.setRoleName("GymOwner");
-        owner.setRole(role);
+        owner.setRole(String.valueOf(role));
 
         gymOwnerDao.addGymOwner(owner);
         System.out.println("Request for registration sent successfully with ownerId---> " + owner.getOwnerId());
